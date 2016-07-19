@@ -51,22 +51,23 @@
         <h3 class="font-size-24">Sign In</h3>
         <p>Please Sign In to continue...</p>
 
-        <form method="post" action="http://getbootstrapadmin.com/remark/base/pages/login-v2.html">
+        <form method="post" action="">
+        	<i style="color:red" id="errorMsg"></i>
           <div class="form-group">
-            <label class="sr-only" for="inputEmail">Username</label>
-            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Username">
+            <label class="sr-only" for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
           </div>
           <div class="form-group">
-            <label class="sr-only" for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" name="password"
-            placeholder="Password">
+            <label class="sr-only" for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
           </div>
           <div class="form-group clearfix">
             <a class="pull-right" href="resetpassword.jsp">Forgot password?</a>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+         
         </form>
-
+		<a class="btn btn-primary btn-block" onclick="login();">Sign In</a>
+		
         <p>No account? <a href="register.jsp">Sign Up</a></p>
 
         <footer class="page-copyright">
@@ -89,8 +90,11 @@
     </div>
   </div>
   <!-- End Page -->
-
-
+	<!-- custom js -->
+		<script src="assets/custom/custom.js"></script>
+		<script src="assets/custom/login.js"></script>
+	<!-- --- -->
+	
   <!-- Core  -->
   <script src="assets/js/more/jquery/jquery.min.js"></script>
   <script src="assets/js/more/bootstrap/bootstrap.min.js"></script>

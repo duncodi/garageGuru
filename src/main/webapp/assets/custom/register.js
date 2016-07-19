@@ -45,12 +45,14 @@ function saveRegistration(params, uri, message){
 }
 
 function completeRegistration(){
-	var comfirmationLink = getElById('confirmationKey').value;
+	var confirmationKey = getElById('confirmationKey').value;
 	var username = getElById('username').value;
 	var password = getElById('password').value;
 	var confirmPassword = getElById('confirmPassword').value;
+	var ownerId = getElById('ownerId').value;
+	var garageId = getElById('garageId').value;
 	
-	var params = 'comfirmationLink=' +encodeURIComponent(comfirmationLink) + '&username=' +encodeURIComponent(username) + '&password=' +encodeURIComponent(password);
+	var params = 'confirmationKey=' +encodeURIComponent(confirmationKey) + '&username=' +encodeURIComponent(username) + '&password=' +encodeURIComponent(password) + '&ownerId=' +encodeURIComponent(ownerId) + '&garageId=' +encodeURIComponent(garageId);
 	var message = "<i style='color:blue'>Registration Complete! <a href='http://localhost:8080/garageGuru/login.jsp'>Login</a></i>";
 	
 	saveAdmin(params, "./completeRegistration/*", message);
