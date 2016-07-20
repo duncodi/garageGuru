@@ -260,8 +260,8 @@
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-                <img src="global/portraits/5.jpg" alt="...">
-                <i></i>
+                <img src="assets/images/userIcon.png" alt="...">
+               									
               </span>
             </a>
             <ul class="dropdown-menu" role="menu">
@@ -401,298 +401,142 @@
       <div>
         <div>
           <ul class="site-menu">
-            <li class="site-menu-category">General</li>
+            <li class="site-menu-category">DASHBOARD for 
+            	<%
+					if (request.getSession().getAttribute("user") != null) {
+						out.println(request.getSession().getAttribute("user").toString().toUpperCase());
+					}
+				%>
+            </li>
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
                 <span class="site-menu-title">Dashboard</span>
                 <div class="site-menu-badge">
-                  <span class="badge badge-success">3</span>
+                  <span class="badge badge-success">1</span>
                 </div>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item active">
                   <a class="animsition-link" href="index.html">
-                    <span class="site-menu-title">Dashboard v1</span>
+                    <span class="site-menu-title">Dashboard</span>
                   </a>
                 </li>
-               
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="dashboard/ecommerce.html">
-                    <span class="site-menu-title">Ecommerce</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="dashboard/analytics.html">
-                    <span class="site-menu-title">Analytics</span>
-                  </a>
-                </li>
-               
               </ul>
             </li>
             
-            <li class="site-menu-category">Options</li>
+            <li class="site-menu-category">Admin Options</li>
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-bookmark" aria-hidden="true"></i>
-                <span class="site-menu-title">Basic UI</span>
+                <span class="site-menu-title">People/Users</span>
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item has-sub">
                   <a href="javascript:void(0)">
-                    <span class="site-menu-title">Panel</span>
+                    <span class="site-menu-title">People</span>
                     <span class="site-menu-arrow"></span>
                   </a>
+                  
                   <ul class="site-menu-sub">
                     <li class="site-menu-item">
-                      <a class="animsition-link" href="uikit/panel-structure.html">
-                        <span class="site-menu-title">Panel Structure</span>
+                      <a class="animsition-link" onclick="createPerson();">
+                        <span class="site-menu-title">Create Person</span>
                       </a>
                     </li>
                     <li class="site-menu-item">
-                      <a class="animsition-link" href="uikit/panel-actions.html">
-                        <span class="site-menu-title">Panel Actions</span>
-                      </a>
-                    </li>
-                    <li class="site-menu-item">
-                      <a class="animsition-link" href="uikit/panel-portlets.html">
-                        <span class="site-menu-title">Panel Portlets</span>
+                      <a class="animsition-link" onclick="viewPeople();">
+                        <span class="site-menu-title">View People</span>
                       </a>
                     </li>
                   </ul>
                 </li>
+                <li class="site-menu-item has-sub">
+                  <a href="javascript:void(0)">
+                    <span class="site-menu-title">Users</span>
+                    <span class="site-menu-arrow"></span>
+                  </a>
+                  
+                  <ul class="site-menu-sub">
+                    <li class="site-menu-item">
+                      <a class="animsition-link" onclick="createUser();">
+                        <span class="site-menu-title">Create User</span>
+                      </a>
+                    </li>
+                    <li class="site-menu-item">
+                      <a class="animsition-link" onclick="viewUser();">
+                        <span class="site-menu-title">View Users</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="site-menu-category">REPORTS</li>
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
+                <span class="site-menu-title">Finance</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/buttons.html">
-                    <span class="site-menu-title">Buttons</span>
+                  <a class="animsition-link" href="charts/chartjs.html">
+                    <span class="site-menu-title">Mini Statement</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/dropdowns.html">
-                    <span class="site-menu-title">Dropdowns</span>
+                  <a class="animsition-link" href="charts/gauges.html">
+                    <span class="site-menu-title">Transaction Listing</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/icons.html">
-                    <span class="site-menu-title">Icons</span>
+                  <a class="animsition-link" href="charts/flot.html">
+                    <span class="site-menu-title">Account Details</span>
                   </a>
                 </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/list.html">
-                    <span class="site-menu-title">List</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/tooltip-popover.html">
-                    <span class="site-menu-title">Tooltip &amp; Popover</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/modals.html">
-                    <span class="site-menu-title">Modals</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/tabs-accordions.html">
-                    <span class="site-menu-title">Tabs &amp; Accordions</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/images.html">
-                    <span class="site-menu-title">Images</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/badges-labels.html">
-                    <span class="site-menu-title">Badges &amp; Labels</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/progress-bars.html">
-                    <span class="site-menu-title">Progress Bars</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/carousel.html">
-                    <span class="site-menu-title">Carousel</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/typography.html">
-                    <span class="site-menu-title">Typography</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/colors.html">
-                    <span class="site-menu-title">Colors</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="uikit/utilities.html">
-                    <span class="site-menu-title">Utilties</span>
-                  </a>
-                </li>
+                
               </ul>
             </li>
             
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
-                <span class="site-menu-title">Chart</span>
+                <span class="site-menu-title">Customers</span>
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
                   <a class="animsition-link" href="charts/chartjs.html">
-                    <span class="site-menu-title">Chart.js</span>
+                    <span class="site-menu-title">View Customers</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
                   <a class="animsition-link" href="charts/gauges.html">
-                    <span class="site-menu-title">Gauges</span>
+                    <span class="site-menu-title">Search Customer</span>
                   </a>
                 </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/flot.html">
-                    <span class="site-menu-title">Flot</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/peity.html">
-                    <span class="site-menu-title">Peity</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/sparkline.html">
-                    <span class="site-menu-title">Sparkline</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/morris.html">
-                    <span class="site-menu-title">Morris</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/chartist.html">
-                    <span class="site-menu-title">Chartist.js</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/rickshaw.html">
-                    <span class="site-menu-title">Rickshaw</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/pie-progress.html">
-                    <span class="site-menu-title">Pie Progress</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/c3.html">
-                    <span class="site-menu-title">C3</span>
-                  </a>
-                </li>
+               
               </ul>
             </li>
             
-            <li class="site-menu-category">Apps</li>
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
-                <i class="site-menu-icon wb-grid-4" aria-hidden="true"></i>
-                <span class="site-menu-title">Apps</span>
+                <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
+                <span class="site-menu-title">Garage Activities</span>
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/contacts/contacts.html">
-                    <span class="site-menu-title">Contacts</span>
+                  <a class="animsition-link" href="charts/chartjs.html">
+                    <span class="site-menu-title">Transactions</span>
                   </a>
                 </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/calendar/calendar.html">
-                    <span class="site-menu-title">Calendar</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/notebook/notebook.html">
-                    <span class="site-menu-title">Notebook</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/taskboard/taskboard.html">
-                    <span class="site-menu-title">Taskboard</span>
-                  </a>
-                </li>
-                <li class="site-menu-item has-sub">
-                  <a href="javascript:void(0)">
-                    <span class="site-menu-title">Documents</span>
-                    <span class="site-menu-arrow"></span>
-                  </a>
-                  <ul class="site-menu-sub">
-                    <li class="site-menu-item">
-                      <a class="animsition-link" href="apps/documents/articles.html">
-                        <span class="site-menu-title">Articles</span>
-                      </a>
-                    </li>
-                    <li class="site-menu-item">
-                      <a class="animsition-link" href="apps/documents/categories.html">
-                        <span class="site-menu-title">Categories</span>
-                      </a>
-                    </li>
-                    <li class="site-menu-item">
-                      <a class="animsition-link" href="apps/documents/article.html">
-                        <span class="site-menu-title">Article</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/forum/forum.html">
-                    <span class="site-menu-title">Forum</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/message/message.html">
-                    <span class="site-menu-title">Message</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/projects/projects.html">
-                    <span class="site-menu-title">Projects</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/mailbox/mailbox.html">
-                    <span class="site-menu-title">Mailbox</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/media/overview.html">
-                    <span class="site-menu-title">Media</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/work/work.html">
-                    <span class="site-menu-title">Work</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="apps/location/location.html">
-                    <span class="site-menu-title">Location</span>
-                  </a>
-                </li>
+               
               </ul>
             </li>
-            <li class="site-menu-category">Angular UI</li>
-            <li class="site-menu-item">
-              <a class="animsition-link" href="angular/index.html">
-                <i class="site-menu-icon bd-angular" aria-hidden="true"></i>
-                <span class="site-menu-title">Angular UI</span>
-                <div class="site-menu-label">
-                  <span class="label label-danger label-round">new</span>
-                </div>
-              </a>
-            </li>
+            
           </ul>
 
           <div class="site-menubar-section">
@@ -796,53 +640,10 @@
           <div class="widget widget-shadow" id="widgetStatistic">
             <div class="widget-content">
               <div class="row no-space height-full" data-plugin="matchHeight">
-                <div class="col-sm-8 col-xs-12">
-                  <div id="widgetJvmap" class="height-full"></div>
+                <div id="ajax-form-content" style="color:#000" class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+               		
                 </div>
-                <div class="col-sm-4 col-xs-12 padding-30">
-                  <div class="form-group">
-                    <div class="input-search input-search-dark">
-                      <i class="input-search-icon wb-search" aria-hidden="true"></i>
-                      <input type="text" class="form-control" name="" placeholder="Search...">
-                    </div>
-                  </div>
-                  <p class="font-size-20 blue-grey-700">Statistic</p>
-                  <p class="blue-grey-400">Status: live</p>
-                  <p>
-                    <i class="icon wb-map blue-grey-400 margin-right-10" aria-hidden="true"></i>
-                    <span>258 Countries, 4835 Cities</span>
-                  </p>
-                  <ul class="list-unstyled margin-top-20">
-                    <li>
-                      <p>VISITS</p>
-                      <div class="progress progress-xs margin-bottom-25">
-                        <div class="progress-bar progress-bar-info bg-blue-600" style="width: 70.3%" aria-valuemax="100"
-                        aria-valuemin="0" aria-valuenow="70.3" role="progressbar">
-                          <span class="sr-only">70.3%</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <p>TODAY</p>
-                      <div class="progress progress-xs margin-bottom-25">
-                        <div class="progress-bar progress-bar-info bg-green-600" style="width: 70.3%" aria-valuemax="100"
-                        aria-valuemin="0" aria-valuenow="70.3" role="progressbar">
-                          <span class="sr-only">70.3%</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <p>WEEK</p>
-                      <div class="progress progress-xs margin-bottom-0">
-                        <div class="progress-bar progress-bar-info bg-purple-600" style="width: 70.3%"
-                        aria-valuemax="100" aria-valuemin="0" aria-valuenow="70.3"
-                        role="progressbar">
-                          <span class="sr-only">70.3%</span>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -862,6 +663,13 @@
       Developed by <a href="#">duncodi</a>
     </div>
   </footer>
+  
+  
+  <!-- custom js -->
+		<script src="assets/custom/custom.js"></script>
+		<script src="assets/custom/customDataView.js"></script>
+	<!-- --- -->
+  
   <!-- Core  -->
   <script src="assets/js/more/jquery/jquery.min.js"></script>
   <script src="assets/js/more/bootstrap/bootstrap.min.js"></script>
@@ -870,6 +678,7 @@
   <script src="assets/js/more/mousewheel/jquery.mousewheel.min.js"></script>
   <script src="assets/js/more/asscrollable/jquery.asScrollable.all.min.js"></script>
   <script src="assets/js/more/ashoverscroll/jquery-asHoverScroll.min.js"></script>
+  <script src="assets/js/bootbox.min.js"></script>
 
   <!-- Plugins -->
   <script src="assets/js/more/switchery/switchery.min.js"></script>

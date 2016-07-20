@@ -1,5 +1,7 @@
 package garageguru.login.bean;
 
+import java.util.List;
+
 import garageguru.login.dao.LoginDaoI;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +30,17 @@ public class LoginBean implements LoginBeanI{
 	@Override
 	public boolean loginCheck(String username, String password) {
 		return loginDao.loginCheck(username, password);
+	}
+
+	@Override
+	public List returnUniqueLink(String username) {
+		return loginDao.returnUniqueLink(username);
+	}
+
+	@Override
+	public int updateAfterLogin(String uniqueLinkString, String username) {
+		// TODO Auto-generated method stub
+		return loginDao.updateAfterLogin(uniqueLinkString, username);
 	}
 
 }

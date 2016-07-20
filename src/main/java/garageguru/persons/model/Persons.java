@@ -131,7 +131,27 @@ public class Persons implements Serializable{
 		this.dateAndStatus = dateAndStatus;
 	}
 	
+	/////
+
 	
-	
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"idNumber\": \"").append(getIdNumber()).append("\", ")
+			.append("\"firstName\": \"").append(getFirstName()).append("\", ")
+			.append("\"secondName\": \"").append(getSecondName()).append("\", ")
+			.append("\"phone\": \"").append(getPhone()).append("\", ")
+			.append("\"email\": \"").append(getEmail()).append("\", ")
+			.append("\"confirmationLink\": \"").append(getConfirmationLink()).append("\", ")
+			.append("\"dateUpdated\": \"").append(getDateAndStatus().getDateUpdated()).append("\", ")
+			.append("\"timeUpdated\": \"").append(getDateAndStatus().getTimeUpdated()).append("\", ")
+			.append("\"activeStatus\": \"").append(getDateAndStatus().getActiveStatus()).append("\", ")
+			.append("\"id\": \"").append(getId()).append("\"")
+			
+		.append("}");
+		
+		return sb.toString();
+	}
+
 	
 }

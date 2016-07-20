@@ -12,8 +12,6 @@ import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.hibernate.Criteria;
-
 public class RegistrationDao implements RegistrationDaoI{
 	
 	private EntityManager em;

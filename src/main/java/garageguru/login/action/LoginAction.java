@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import garageguru.login.bean.LoginBeanI;
 import garageguru.users.model.Users;
@@ -50,20 +51,30 @@ public class LoginAction extends HttpServlet{
 		boolean check;
 		check = loginBean.loginCheck(username, password);
 		
+		
 		if(check==true){
+			List uniqueLink = loginBean.returnUniqueLink(username);
+			String uniqueLinkString = (String) uniqueLink.get(0); 
+			
 			//resp.println("Success");
 			HttpSession session = request.getSession();
 			session.setAttribute("user", username);
+			session.setAttribute("uniqueLink", uniqueLinkString);
 			
 			//set session to expire after inactive 10 mins
 			session.setMaxInactiveInterval(10*60);
 			Cookie userNameCookie = new Cookie("user", username);
 			response.addCookie(userNameCookie);
 			
+			Cookie uniqueLinkCookie = new Cookie("uniqueLink", uniqueLinkString);
+			response.addCookie(uniqueLinkCookie);
+			
 			//get encoded url string
 			/*String encodedURL = response.encodeRedirectUrl("./../index.jsp");
 			response.sendRedirect(encodedURL);
 			*/
+			
+			loginBean.updateAfterLogin(uniqueLinkString, username);
 			
 		}
 			
