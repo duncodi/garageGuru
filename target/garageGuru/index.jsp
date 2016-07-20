@@ -260,8 +260,13 @@
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
+<<<<<<< HEAD
                 <img src="assets/images/userIcon.png" alt="...">
                									
+=======
+                <img src="assets/images/logo.png" alt="...">
+                <i></i>
+>>>>>>> 7f970d09a13786c2b1de91de6f9c5522a7a2a5c4
               </span>
             </a>
             <ul class="dropdown-menu" role="menu">
@@ -401,6 +406,7 @@
       <div>
         <div>
           <ul class="site-menu">
+
             <li class="site-menu-category">DASHBOARD for 
             	<%
 					if (request.getSession().getAttribute("user") != null) {
@@ -408,6 +414,7 @@
 					}
 				%>
             </li>
+
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
@@ -640,8 +647,8 @@
           <div class="widget widget-shadow" id="widgetStatistic">
             <div class="widget-content">
               <div class="row no-space height-full" data-plugin="matchHeight">
-                <div id="ajax-form-content" style="color:#000" class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-               		
+                <div id="ajax-form-content" class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
+
                 </div>
                
               </div>

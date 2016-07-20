@@ -28,7 +28,10 @@ function createPerson(){
 					"</div>" +
 					"<div class='panel-body container-fluid'>" +
 						"<form autocomplete='off' method='post' action='#'>" +
+<<<<<<< HEAD
 							
+=======
+>>>>>>> 7f970d09a13786c2b1de91de6f9c5522a7a2a5c4
 							"<div class='form-group form-material floating'>" +
 								"<input type='text' class='form-control' id='idNumber' name='idNumber' />" +
 								"<label class='floating-label'>Id/Passport/PF No.</label>" +

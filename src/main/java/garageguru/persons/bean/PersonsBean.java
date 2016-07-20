@@ -3,7 +3,6 @@ package garageguru.persons.bean;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -35,7 +34,6 @@ public class PersonsBean implements PersonsBeanI {
 		
 		personsDao.add(person);
 	}
-
 	/*
 	@Override
 	public List<Persons> staff(String uniqueLink) {
@@ -64,5 +62,4 @@ public class PersonsBean implements PersonsBeanI {
 		
 	}
 	
-
 }

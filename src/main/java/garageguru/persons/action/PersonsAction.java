@@ -76,6 +76,7 @@ public class PersonsAction extends HttpServlet{
 		
 	}
 	
+
 	/*
 	 * public void list(HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -89,4 +90,5 @@ public class PersonsAction extends HttpServlet{
 		resp.println(personsBean.allStaffInJson(uniqueLink));
 		
 	}
+
 }

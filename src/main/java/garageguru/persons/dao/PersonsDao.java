@@ -1,12 +1,13 @@
 package garageguru.persons.dao;
-
 import java.util.List;
 
 import garageguru.persons.model.Persons;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import garageguru.persons.model.Persons;
 
+import javax.persistence.EntityManager;
 public class PersonsDao implements PersonsDaoI{
 	private EntityManager em;
 	
@@ -37,6 +38,5 @@ public class PersonsDao implements PersonsDaoI{
 		return ((Long) result.get(0)).intValue();
 		
 	}
-
 
 }
