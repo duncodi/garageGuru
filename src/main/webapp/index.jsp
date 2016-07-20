@@ -260,13 +260,8 @@
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-<<<<<<< HEAD
                 <img src="assets/images/userIcon.png" alt="...">
                									
-=======
-                <img src="assets/images/logo.png" alt="...">
-                <i></i>
->>>>>>> 7f970d09a13786c2b1de91de6f9c5522a7a2a5c4
               </span>
             </a>
             <ul class="dropdown-menu" role="menu">
