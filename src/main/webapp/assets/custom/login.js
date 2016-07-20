@@ -29,13 +29,3 @@ function loginAction(params, uri){
 	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	ajax.send(params);
 }
-
-/*
-var loginCheck = responseText;
-				if(loginCheck==1){
-					window.location.href("http://localhost:8080/garageGuru/index.jsp");
-				}
-				else{
-					getElById('errorMsg').innerHTML = ajax.responseText;
-				}
-*/
