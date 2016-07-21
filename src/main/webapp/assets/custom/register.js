@@ -35,7 +35,7 @@ function saveRegistration(params, uri, message){
 	ajax.onreadystatechange = function(){
 		
 		if(ajax.readyState<4)
-			getElById('register').innerHTML = "Loading...";
+			getElById('register').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Saving...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
@@ -68,7 +68,7 @@ function saveAdmin(params, uri, message){
 	ajax.onreadystatechange = function(){
 		
 		if(ajax.readyState<4)
-			getElById('confirmRegistration').innerHTML = "Loading...";
+			getElById('confirmRegistration').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Processing...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){

@@ -17,7 +17,7 @@ function loginAction(params, uri){
 	ajax.onreadystatechange = function(){
 		
 		if(ajax.readyState<4)
-			getElById('errorMsg').innerHTML = "Signing you in. Please wait...";
+			getElById('errorMsg').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Signing you in. Please wait...";
 		
 		if(ajax.readyState == 4){			
 			if(ajax.status == 200){

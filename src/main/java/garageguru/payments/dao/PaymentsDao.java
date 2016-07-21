@@ -45,6 +45,27 @@ public class PaymentsDao implements PaymentsDaoI {
 		List result = query.getResultList();
 		return ((Long) result.get(0)).intValue();
 	}
+	
+	//MINI STATEMENT
+	@Override
+	public int countMiniStatement(String confirmationLink) {
+		Query query = em.createQuery("select count(id) from Payments where confirmationLink=:confirmationLink");
+		query.setParameter("confirmationLink", confirmationLink);
+		//query.setMaxResults(3);
+		
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
+
+	@Override
+	public List<Payments> miniStatementInJson(Payments allPayments, String confirmationLink) {
+		Query query = em.createQuery("from Payments where confirmationLink=:confirmationLink");
+		query.setParameter("confirmationLink", confirmationLink);
+		//query.setMaxResults(4);
+		return query.getResultList();
+	}
+	//////////END MINI STATEMENT
 
 	
 }

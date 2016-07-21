@@ -7,7 +7,7 @@ function formDisplay(form){
 	var ajax = new XMLHttpRequest();
 	ajax.onreadystatechange = function(){
 		if(ajax.readyState<4)
-			getElById('ajax-form-content').innerHTML = "Loading...";
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Processing...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
@@ -74,7 +74,7 @@ function save(params, uri, message, reloadId){
 	var ajax = new XMLHttpRequest();
 	ajax.onreadystatechange = function(){
 		if(ajax.readyState<4)
-			getElById('ajax-form-content').innerHTML = "Saving. Please wait...";
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Saving. Please wait...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){

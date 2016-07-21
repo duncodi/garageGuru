@@ -61,5 +61,26 @@ public class PaymentsBean implements PaymentsBeanI {
 	public int returnMaxRefNo(String confirmationLink) {
 		return paymentsDao.returnMaxRefNo(confirmationLink);
 	}
+
+
+	@Override
+	public String miniStatementInJson(String confirmationLink) {
+		Payments filter = new Payments();
+		
+		List<Payments> payments = paymentsDao.miniStatementInJson(filter, confirmationLink);
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = paymentsDao.countMiniStatement(confirmationLink);
+		for(Payments miniStatement : payments){
+			sb.append(miniStatement.getJson());
+			
+			count--;
+			if(count>=1)
+				sb.append(",");
+		}
+		sb.append("]");
+		return sb.toString();
+	}
 	
 }

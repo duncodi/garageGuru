@@ -7,7 +7,7 @@ function displayStaff(uri){
 	
 	ajax.onreadystatechange = function(){
 		if(ajax.readyState<4)
-			getElById('ajax-form-content').innerHTML = 'Loading...';
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Loading...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
@@ -97,7 +97,7 @@ function displayUsers(uri){
 	
 	ajax.onreadystatechange = function(){
 		if(ajax.readyState<4)
-			getElById('ajax-form-content').innerHTML = 'Loading...';
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Loading...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
@@ -185,7 +185,7 @@ function displayServices(uri){
 	
 	ajax.onreadystatechange = function(){
 		if(ajax.readyState<4)
-			getElById('ajax-form-content').innerHTML = 'Loading...';
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Loading...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
@@ -281,7 +281,7 @@ function displayPayments(uri){
 	
 	ajax.onreadystatechange = function(){
 		if(ajax.readyState<4)
-			getElById('ajax-form-content').innerHTML = 'Loading...';
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Loading...";
 		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
@@ -360,5 +360,92 @@ function displayPayments(uri){
 function viewPayments(){
 
 	displayPayments('./payments/*');
+	
+}
+
+function displayMiniStatement(uri){
+	var ajax = new XMLHttpRequest();
+	
+	ajax.onreadystatechange = function(){
+		if(ajax.readyState<4)
+			getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif'/> Loading...";
+		
+		if(ajax.readyState == 4){
+			if(ajax.status == 200){
+				
+				response = ajax.responseText;
+				
+				var jsonRecords = JSON.parse(response);
+				
+				var data = "<div class=\"panel\">";
+				data+=				"<header class=\"panel-heading\">";
+				data+=					"<h3 class=\"panel-title\">";
+				data+=						"All Payments";
+				data+=					"</h3>";
+				data+=				"</header>";
+				data+=				"<div class=\"panel-body\">";
+				data+=					"<div class=\"table-responsive\">";
+				data+=						"<table class=\"table table-hover dataTable table-striped\" id=\"exampleFixedHeader\">";
+				data+=							"<thead>";
+				data+=								"<tr>";
+				data+=									"<th>Txn Type</th>";
+				data+=									"<th>Ref. No.</th>";
+				data+=									"<th>Amount</th>";
+				data+=									"<th>GSV No.</th>";
+				data+=									"<th>Narration</th>";
+				data+=									"<th>Posted By</th>";
+				data+=								"</tr>";
+				data+=							"</thead>";
+				data+=							"<tfoot>";
+				data+=								"<tr>";
+				data+=									"<th>Txn Type</th>";
+				data+=									"<th>Ref. No.</th>";
+				data+=									"<th>Amount</th>";
+				data+=									"<th>GSV No.</th>";
+				data+=									"<th>Narration</th>";
+				data+=									"<th>Posted By</th>";
+				data+=								"</tr>";
+				data+=							"</tfoot>";
+				data+=							"<tbody>";
+												
+												
+												
+												
+				
+				   
+				    for (var i in jsonRecords){
+				    	var id = jsonRecords[i].id;
+				    	
+				        data+="<tr>";
+				        data+="<td>"+jsonRecords[i].transactionType+"</td>";
+				        data+="<td>"+jsonRecords[i].refNo+"</td>";
+				        data+="<td>"+jsonRecords[i].amount+"</td>";
+				        data+="<td>"+jsonRecords[i].serviceNo+"</td>";
+				        data+="<td>"+jsonRecords[i].narration+"</td>";
+				        data+="<td>"+jsonRecords[i].postedBy+", on "+jsonRecords[i].dateUpdated+" at "+jsonRecords[i].timeUpdated+"</td>";
+				    	data+="</tr>";
+				        
+				    }
+				    
+											
+											
+											data+="</tbody>";
+							data+=						"</table>";
+							data+=		"</div>";
+							data+=	"</div>";
+							data+="</div>";	
+
+				getElById('ajax-form-content').innerHTML = data;
+			}
+		}		
+	}
+	ajax.open('GET', uri, true);
+	ajax.send();
+}
+
+
+function viewMiniStatement(){
+
+	displayMiniStatement('./payments/MiniStatement');
 	
 }

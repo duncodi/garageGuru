@@ -43,7 +43,16 @@ public class PaymentsAction extends HttpServlet{
 		resp.println("Size: "+maxServiceNo);
 		*/
 		
-		this.payments(response, uniqueLink);
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+		
+		if(path.equalsIgnoreCase("ministatement")){
+			
+			this.ministatement(response, uniqueLink);
+			
+		}else{
+			this.payments(response, uniqueLink);
+		}
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -107,6 +116,12 @@ public class PaymentsAction extends HttpServlet{
 	public void payments(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
 		PrintWriter resp = response.getWriter();
 		resp.println(paymentsBean.allPaymentsInJson(uniqueLink));
+		
+	}
+	
+	public void ministatement(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
+		PrintWriter resp = response.getWriter();
+		resp.println(paymentsBean.miniStatementInJson(uniqueLink));
 		
 	}
 }

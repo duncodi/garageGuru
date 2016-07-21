@@ -15,4 +15,7 @@ public interface PaymentsDaoI {
 	int countAllPayments(String confirmationLink);
 	
 	int returnMaxRefNo(String confirmationLink);
+	
+	int countMiniStatement(String confirmationLink);
+	List<Payments> miniStatementInJson(Payments allPayments, String confirmationLink);
 }

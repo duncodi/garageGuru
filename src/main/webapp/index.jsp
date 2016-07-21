@@ -507,7 +507,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/chartjs.html">
+                  <a class="animsition-link" onclick="viewMiniStatement()">
                     <span class="site-menu-title">Mini Statement</span>
                   </a>
                 </li>
@@ -517,7 +517,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/flot.html">
+                  <a class="animsition-link" onclick="viewAccount()">
                     <span class="site-menu-title">Account Details</span>
                   </a>
                 </li>

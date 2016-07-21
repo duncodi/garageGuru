@@ -8,4 +8,6 @@ public interface PaymentsBeanI {
 	int returnMaxRefNo(String confirmationLink);
 	
 	String allPaymentsInJson(String confirmationLink);
+	
+	String miniStatementInJson(String confirmationLink);
 }
