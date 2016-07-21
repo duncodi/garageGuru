@@ -135,4 +135,23 @@ public class Users implements Serializable{
 	}
 	
 	
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"username\": \"").append(getUsername()).append("\", ")
+			.append("\"userLevel\": \"").append(getUserLevel()).append("\", ")
+			.append("\"lastLoginDate\": \"").append(getLastLoginDate()).append("\", ")
+			.append("\"lastLoginTime\": \"").append(getLastLoginTime()).append("\", ")
+			.append("\"loggedIn\": \"").append(getLoggedIn()).append("\", ")
+			.append("\"confirmationLink\": \"").append(getConfirmationLink()).append("\", ")
+			.append("\"dateUpdated\": \"").append(getDateAndStatus().getDateUpdated()).append("\", ")
+			.append("\"timeUpdated\": \"").append(getDateAndStatus().getTimeUpdated()).append("\", ")
+			.append("\"activeStatus\": \"").append(getDateAndStatus().getActiveStatus()).append("\", ")
+			.append("\"id\": \"").append(getId()).append("\"")
+			
+		.append("}");
+		
+		return sb.toString();
+	}
+	
 }

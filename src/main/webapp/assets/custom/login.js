@@ -15,7 +15,11 @@ function login(){
 function loginAction(params, uri){
 	var ajax = new XMLHttpRequest();
 	ajax.onreadystatechange = function(){
-		if(ajax.readyState == 4){
+		
+		if(ajax.readyState<4)
+			getElById('errorMsg').innerHTML = "Signing you in. Please wait...";
+		
+		if(ajax.readyState == 4){			
 			if(ajax.status == 200){
 				if(ajax.responseText == "")
 					location.href="http://localhost:8080/garageGuru/index.jsp";

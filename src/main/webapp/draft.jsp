@@ -34,6 +34,31 @@
                   <input type='text' class='form-control' id='phone' name='phone' placeholder='Phone e.g. 712345678' />
                   <label class='floating-label'>Cell Phone (+254)</label>
                 </div>
+                
+                <div class='form-group form-material'>
+                  <label class='control-label' for='textarea'>Textarea</label>
+                  <textarea class='form-control' id='textarea' name='textarea' rows='3'></textarea>
+                </div>
+                
+                <div class='form-group form-material floating'>
+                  <label class='floating-label floating-label-static'>Multi Select</label>
+                  <select class='form-control' multiple=''>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                
+                <div class='form-group form-material floating'>
+                  <select name='completeService' id='completeService' class='form-control'>
+                    <option>&nbsp;</option>
+                    <option>Yes</option>
+                    <option>No</option>                
+                  </select>
+                  <label class='floating-label'>Do you want to complete this Service?</label>
+                </div>
                
               </form>
               <a class='btn btn-primary btn-block' onclick='savePerson();'>Register Staff</a>

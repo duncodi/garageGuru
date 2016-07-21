@@ -467,7 +467,7 @@
                       </a>
                     </li>
                     <li class="site-menu-item">
-                      <a class="animsition-link" onclick="viewUser();">
+                      <a class="animsition-link" onclick="viewUsers();">
                         <span class="site-menu-title">View Users</span>
                       </a>
                     </li>
@@ -475,6 +475,29 @@
                 </li>
               </ul>
             </li>
+            
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
+                <span class="site-menu-title">Services</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="createService();">
+                    <span class="site-menu-title">New Service</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="createPayment();">
+                    <span class="site-menu-title">New Payment</span>
+                  </a>
+                </li>
+                
+                
+              </ul>
+            </li>
+            
             <li class="site-menu-category">REPORTS</li>
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
@@ -489,7 +512,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/gauges.html">
+                  <a class="animsition-link" onclick="viewPayments()">
                     <span class="site-menu-title">Transaction Listing</span>
                   </a>
                 </li>
@@ -531,7 +554,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/chartjs.html">
+                  <a class="animsition-link" onclick="viewServices()">
                     <span class="site-menu-title">Transactions</span>
                   </a>
                 </li>
@@ -642,7 +665,7 @@
           <div class="widget widget-shadow" id="widgetStatistic">
             <div class="widget-content">
               <div class="row no-space height-full" data-plugin="matchHeight">
-                <div id="ajax-form-content" class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
+                <div id="ajax-form-content" class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
 
                 </div>
                

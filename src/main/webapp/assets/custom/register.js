@@ -33,6 +33,10 @@ function saveRegistration(params, uri, message){
 	var ajax = new XMLHttpRequest();
 	
 	ajax.onreadystatechange = function(){
+		
+		if(ajax.readyState<4)
+			getElById('register').innerHTML = "Loading...";
+		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
 				getElById('register').innerHTML = message;
@@ -62,6 +66,10 @@ function saveAdmin(params, uri, message){
 	var ajax = new XMLHttpRequest();
 	
 	ajax.onreadystatechange = function(){
+		
+		if(ajax.readyState<4)
+			getElById('confirmRegistration').innerHTML = "Loading...";
+		
 		if(ajax.readyState == 4){
 			if(ajax.status == 200){
 				getElById('confirmRegistration').innerHTML = message;
