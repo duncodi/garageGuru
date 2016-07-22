@@ -1,5 +1,7 @@
 package garageguru.payments.bean;
 
+import java.util.List;
+
 import garageguru.payments.model.Payments;
 
 public interface PaymentsBeanI {
@@ -10,4 +12,12 @@ public interface PaymentsBeanI {
 	String allPaymentsInJson(String confirmationLink);
 	
 	String miniStatementInJson(String confirmationLink);
+	
+	//account details
+	int countAllCredits(String confirmationLink);
+	int countAllDebits(String confirmationLink);
+	List sumAllCredits(String confirmationLink);
+	List sumAllDebits(String confirmationLink);
+
+	List<Payments> paymentsList();
 }

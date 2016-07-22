@@ -12,9 +12,12 @@ public interface ServicesDaoI {
 	
 	int countAllServices(String uniqueLink);
 	
+	int countPendingServices(String uniqueLink);
+	
 	int returnMaxServiceNo(String confirmationLink);
 	
 	List<Services> allServicesInJson(Services allServices, String uniqueLink);
+	List<Services> pendingServicesInJson(Services pendingServices, String uniqueLink);
 	
 	int completeService(String completeService, String serviceNo, String confirmationLink);
 }

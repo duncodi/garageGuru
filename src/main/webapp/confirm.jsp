@@ -24,7 +24,6 @@
     <!-- Fonts -->
     <link rel='stylesheet' href='assets/fonts/web-icons/web-icons.min.css'>
     <link rel='stylesheet' href='assets/fonts/brand-icons/brand-icons.min.css'>
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
     
     <script src='assets/js/more/modernizr/modernizr.min.js'></script>
     <script src='assets/js/more/breakpoints/breakpoints.min.js'></script>
@@ -50,6 +49,10 @@
     	var ajax = new XMLHttpRequest();
     	
     	ajax.onreadystatechange = function(){
+    		if(ajax.readyState<4)
+    			getElById('errorMsg').innerHTML = "<img src='assets/images/AjaxLoader.gif' width='20px' height='20px'/> Processing. Please wait...";
+    		
+    		
     		if(ajax.readyState == 4){
     			if(ajax.status == 200){
     				document.getElementById('confirmRegistration').innerHTML = ajax.responseText;

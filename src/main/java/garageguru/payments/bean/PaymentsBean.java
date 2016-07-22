@@ -82,5 +82,37 @@ public class PaymentsBean implements PaymentsBeanI {
 		sb.append("]");
 		return sb.toString();
 	}
+
+
+	@Override
+	public int countAllCredits(String confirmationLink) {
+		return paymentsDao.countAllCredits(confirmationLink);
+	}
+
+
+	@Override
+	public int countAllDebits(String confirmationLink) {
+		return paymentsDao.countAllDebits(confirmationLink);
+	}
+
+
+	@Override
+	public List sumAllCredits(String confirmationLink) {
+		return paymentsDao.sumAllCredits(confirmationLink);
+	}
+
+
+	@Override
+	public List sumAllDebits(String confirmationLink) {
+		return paymentsDao.sumAllDebits(confirmationLink);
+	}
+	
+	
+	//REST
+	@Override
+	public List<Payments> paymentsList() {
+		// TODO Auto-generated method stub
+		return paymentsDao.paymentsList(new Payments());
+	}
 	
 }

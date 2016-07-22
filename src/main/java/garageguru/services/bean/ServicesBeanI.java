@@ -9,5 +9,7 @@ public interface ServicesBeanI {
 	
 	String allServicesInJson(String uniqueLink);
 	
+	String pendingServicesInJson(String uniqueLink);
+	
 	int completeService(String completeService, String serviceNo, String confirmationLink);
 }

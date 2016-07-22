@@ -71,6 +71,26 @@ public class ServicesBean implements ServicesBeanI{
 	public int completeService(String completeService, String serviceNo, String confirmationLink) {
 		return servicesDao.completeService(completeService, serviceNo, confirmationLink);
 	}
+
+	@Override
+	public String pendingServicesInJson(String uniqueLink) {
+		Services filter = new Services();
+		
+		List<Services> services = servicesDao.pendingServicesInJson(filter, uniqueLink);
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = servicesDao.countPendingServices(uniqueLink);
+		for(Services pendingServices : services){
+			sb.append(pendingServices.getJson());
+			
+			count--;
+			if(count>=1)
+				sb.append(",");
+		}
+		sb.append("]");
+		return sb.toString();
+	}
 	
 	
 }

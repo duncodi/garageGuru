@@ -1,9 +1,9 @@
 package garageguru.services.action;
 
-import gagageguru.registration.bean.RegistrationBeanI;
 import garageguru.common.model.CommonFields;
 import garageguru.garages.model.Garages;
 import garageguru.persons.model.Persons;
+import garageguru.registration.bean.RegistrationBeanI;
 import garageguru.services.bean.ServicesBeanI;
 import garageguru.services.model.Services;
 
@@ -37,12 +37,17 @@ public class ServicesAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		String uniqueLink = session.getAttribute("uniqueLink").toString();
 		
-		/*int maxServiceNo = servicesBean.returnMaxServiceNo(uniqueLink);
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
 		
-		resp.println("Size: "+maxServiceNo);
-		*/
+		if(path.equalsIgnoreCase("pending")){
+			
+			this.pendingServices(response, uniqueLink);
+			
+		}else{
+			this.services(response, uniqueLink);
+		}
 		
-		this.services(response, uniqueLink);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -108,6 +113,12 @@ public class ServicesAction extends HttpServlet {
 	public void services(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
 		PrintWriter resp = response.getWriter();
 		resp.println(servicesBean.allServicesInJson(uniqueLink));
+		
+	}
+	
+	public void pendingServices(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
+		PrintWriter resp = response.getWriter();
+		resp.println(servicesBean.pendingServicesInJson(uniqueLink));
 		
 	}
 }

@@ -6,11 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import gagageguru.registration.bean.RegistrationBeanI;
 import garageguru.common.model.CommonFields;
 import garageguru.garages.model.Garages;
 import garageguru.payments.bean.PaymentsBeanI;
 import garageguru.payments.model.Payments;
+import garageguru.registration.bean.RegistrationBeanI;
 import garageguru.services.bean.ServicesBean;
 import garageguru.services.bean.ServicesBeanI;
 
@@ -50,7 +50,10 @@ public class PaymentsAction extends HttpServlet{
 			
 			this.ministatement(response, uniqueLink);
 			
-		}else{
+		}else if(path.equalsIgnoreCase("accountdetails")){
+			this.accountDetails(response, uniqueLink);
+		}		
+		else{
 			this.payments(response, uniqueLink);
 		}
 	}
@@ -116,12 +119,38 @@ public class PaymentsAction extends HttpServlet{
 	public void payments(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
 		PrintWriter resp = response.getWriter();
 		resp.println(paymentsBean.allPaymentsInJson(uniqueLink));
-		
 	}
 	
 	public void ministatement(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
 		PrintWriter resp = response.getWriter();
 		resp.println(paymentsBean.miniStatementInJson(uniqueLink));
+	}
+	
+	public void accountDetails(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
+		PrintWriter resp = response.getWriter();
+		List sumCredits = paymentsBean.sumAllCredits(uniqueLink);
+		List sumDebits = paymentsBean.sumAllDebits(uniqueLink);
+		int countCredits = paymentsBean.countAllCredits(uniqueLink);
+		int countDebits = paymentsBean.countAllDebits(uniqueLink);
 		
+		Long totalCR = (Long) sumCredits.get(0);
+		if(totalCR==null)
+			totalCR = (long) 0;
+		
+		Long totalDR = (Long) sumDebits.get(0);
+		if(totalDR==null)
+			totalDR = (long) 0;
+		
+		//json
+		resp.print("[");
+		
+		resp.print("{");
+		resp.print("\"");resp.print("sumCredits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(totalCR);resp.print("\", ");
+		resp.print("\"");resp.print("sumDebits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(totalDR);resp.print("\", ");
+		resp.print("\"");resp.print("countCredits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(countCredits);resp.print("\", ");
+		resp.print("\"");resp.print("countDebits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(countDebits);resp.print("\"");
+		resp.print("}");
+		
+		resp.print("]");
 	}
 }

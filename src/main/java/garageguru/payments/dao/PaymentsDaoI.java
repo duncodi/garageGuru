@@ -18,4 +18,14 @@ public interface PaymentsDaoI {
 	
 	int countMiniStatement(String confirmationLink);
 	List<Payments> miniStatementInJson(Payments allPayments, String confirmationLink);
+	
+	//account details
+	int countAllCredits(String confirmationLink);
+	int countAllDebits(String confirmationLink);
+	List sumAllCredits(String confirmationLink);
+	List sumAllDebits(String confirmationLink);
+	
+	//rest
+	List<Payments> paymentsList(Payments paymentsList);
+	
 }

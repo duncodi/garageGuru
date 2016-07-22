@@ -24,7 +24,6 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="assets/fonts/web-icons/web-icons.min.css">
     <link rel="stylesheet" href="assets/fonts/brand-icons/brand-icons.min.css">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
     
     <script src="assets/js/more/modernizr/modernizr.min.js"></script>
     <script src="assets/js/more/breakpoints/breakpoints.min.js"></script>
@@ -517,7 +516,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" onclick="viewAccount()">
+                  <a class="animsition-link" onclick="viewAccountDetails()">
                     <span class="site-menu-title">Account Details</span>
                   </a>
                 </li>
@@ -532,13 +531,9 @@
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
+                
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/chartjs.html">
-                    <span class="site-menu-title">View Customers</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="charts/gauges.html">
+                  <a class="animsition-link" onclick="createCustomerSearch();">
                     <span class="site-menu-title">Search Customer</span>
                   </a>
                 </li>
@@ -549,16 +544,20 @@
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
-                <span class="site-menu-title">Garage Activities</span>
+                <span class="site-menu-title">Garage Services</span>
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
                   <a class="animsition-link" onclick="viewServices()">
-                    <span class="site-menu-title">Transactions</span>
+                    <span class="site-menu-title">All Services</span>
                   </a>
                 </li>
-               
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="pendingServices()">
+                    <span class="site-menu-title">Pending Services</span>
+                  </a>
+               	</li>
               </ul>
             </li>
             
@@ -693,6 +692,7 @@
   <!-- custom js -->
 		<script src="assets/custom/custom.js"></script>
 		<script src="assets/custom/customDataView.js"></script>
+		<script src="assets/custom/customSearchAndFilter.js"></script>
 	<!-- --- -->
   
   <!-- Core  -->
