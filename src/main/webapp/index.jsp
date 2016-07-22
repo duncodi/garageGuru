@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap-extend.min.css">
     <link rel="stylesheet" href="assets/css/site.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
+    
     
    
     <!-- Page -->
@@ -512,7 +514,12 @@
                 </li>
                 <li class="site-menu-item">
                   <a class="animsition-link" onclick="viewPayments()">
-                    <span class="site-menu-title">Transaction Listing</span>
+                    <span class="site-menu-title">Full Transaction Listing</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="createPaymentsFilter()">
+                    <span class="site-menu-title">Filter Transactions</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
@@ -558,6 +565,11 @@
                     <span class="site-menu-title">Pending Services</span>
                   </a>
                	</li>
+               	<li class="site-menu-item">
+                  <a class="animsition-link" onclick="createServicesFilter()">
+                    <span class="site-menu-title">Filter Services</span>
+                  </a>
+                </li>
               </ul>
             </li>
             
@@ -692,7 +704,9 @@
   <!-- custom js -->
 		<script src="assets/custom/custom.js"></script>
 		<script src="assets/custom/customDataView.js"></script>
-		<script src="assets/custom/customSearchAndFilter.js"></script>
+		<script src="assets/custom/customerSearch.js"></script>
+		<script src="assets/custom/customServicesFilter.js"></script>
+		<script src="assets/custom/customPaymentsFilter.js"></script>
 	<!-- --- -->
   
   <!-- Core  -->
@@ -730,8 +744,9 @@
   <script src="assets/js/components/switchery.min.js"></script>
 
   <script src="assets/js/components/jquery-placeholder.min.js"></script>
-
-
+  
+  <script src="assets/js/more/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  
   
   <script>
     (function(document, window, $) {

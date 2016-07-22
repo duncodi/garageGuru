@@ -1945,3 +1945,19 @@
   </script>
 </body>
 </html>
+
+
+<div class='example'>
+                  <div class='input-daterange' data-plugin='datepicker'>
+                    <div class='input-group'>
+                      <span class='input-group-addon'>
+                        <i class='icon wb-calendar' aria-hidden='true'></i>
+                      </span>
+                      <input type='text' class='form-control' name='start' />
+                    </div>
+                    <div class='input-group'>
+                      <span class='input-group-addon'>to</span>
+                      <input type='text' class='form-control' name='end' />
+                    </div>
+                  </div>
+                </div>
