@@ -28,7 +28,15 @@ public class PersonsAction extends HttpServlet{
 		HttpSession session = request.getSession();
 		String uniqueLink = session.getAttribute("uniqueLink").toString();
 		
-		this.staff(response, uniqueLink);
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+		
+		if(path.equalsIgnoreCase("deleteStaff")){
+			String idStr = request.getParameter("deleteId");
+			Long id = Long.parseLong(idStr);
+			this.deleteStaff(response, id, uniqueLink);
+		}else
+			this.staff(response, uniqueLink);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -89,6 +97,10 @@ public class PersonsAction extends HttpServlet{
 		PrintWriter resp = response.getWriter();
 		resp.println(personsBean.allStaffInJson(uniqueLink));
 		
+	}
+	
+	public void deleteStaff(HttpServletResponse response, Long id, String uniqueLink){
+		personsBean.deleteStaff(id, uniqueLink);
 	}
 
 }

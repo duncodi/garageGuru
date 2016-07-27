@@ -61,7 +61,7 @@ function displayStaff(uri){
 				        data+="<td>"+jsonRecords[i].dateUpdated+" at "+jsonRecords[i].timeUpdated+"</td>";
 				        
 				        data+="<td><a class=\"btn btn-warning btn-block btn-xs\" onclick=\"editPerson("+id+");\">Edit</a></td>";
-				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deletePerson("+id+");\">Delete</a></td>";
+				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deleteStaff("+id+");\">Delete</a></td>";
 				        data+="</tr>";
 				        
 				    }
@@ -140,16 +140,40 @@ function displayUsers(uri){
 				   
 				    for (var i in jsonRecords){
 				    	var id = jsonRecords[i].id;
+				    	var lastLoginDate = jsonRecords[i].lastLoginDate;
+				    	var lastLoginTime = jsonRecords[i].lastLoginTime;
+				    	var loggedIn = jsonRecords[i].loggedIn;
+				    	//var firstName =  jsonRecords[i].firstName;
+				    	//var secondName =  jsonRecords[i].secondName;
+				    	//var idNumber =  jsonRecords[i].idNumber;
+				    	//var staff = idNumber+", "+firstName+" "+secondName;
+				    	
+				    	var lastLogin = null;
+				    	
+				    	if(loggedIn==1)
+				    		loggedIn = "Yes";
+				    	else
+				    		loggedIn = "No";
+				    	
+				    	if(lastLoginDate=="null" && lastLoginTime=="null")
+				    		lastLogin = "Never";
+				    	else
+				    		lastLogin = lastLoginDate+" at "+lastLoginTime;
 				    	
 				        data+="<tr>";
 				        data+="<td>"+jsonRecords[i].username+"</td>";
 				        data+="<td>"+jsonRecords[i].userLevel+"</td>";
-				        data+="<td>"+jsonRecords[i].lastLoginDate+" at "+jsonRecords[i].lastLoginTime+"</td>";
-				        data+="<td>"+jsonRecords[i].loggedIn+"</td>";
+				        data+="<td>"+lastLogin+"</td>";
+				        data+="<td>"+loggedIn+"</td>";
+				        //data+="<td>"+staff+"</td>";
 				        data+="<td>"+jsonRecords[i].dateUpdated+" at "+jsonRecords[i].timeUpdated+"</td>";
 				        
-				        data+="<td><a class=\"btn btn-warning btn-block btn-xs\" onclick=\"editPerson("+id+");\">Edit</a></td>";
-				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deletePerson("+id+");\">Delete</a></td>";
+				        var uName = jsonRecords[i].username;
+				        
+				        //, uri, reloadId, message, uName
+				        data+="<td><a class=\"btn btn-warning btn-block btn-xs\" onclick=\"editUser("+id+");\">Edit</a></td>";
+				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deleteUser("+id+")\">Delete</a></td>";
+				         
 				        data+="</tr>";
 				        
 				    }
@@ -209,6 +233,9 @@ function displayServices(uri){
 				data+=									"<th>Full Name</th>";
 				data+=									"<th>Cell Phone</th>";
 				data+=									"<th>Description</th>";
+				data+=									"<th>Cost</th>";
+				data+=									"<th>Total Paid</th>";
+				data+=									"<th>Balance</th>";
 				data+=									"<th>Complete?</th>";
 				data+=									"<th>Posted By</th>";
 				data+=								"</tr>";
@@ -221,6 +248,9 @@ function displayServices(uri){
 				data+=									"<th>Full Name</th>";
 				data+=									"<th>Cell Phone</th>";
 				data+=									"<th>Description</th>";
+				data+=									"<th>Cost</th>";
+				data+=									"<th>Total Paid</th>";
+				data+=									"<th>Balance</th>";
 				data+=									"<th>Complete?</th>";
 				data+=									"<th>Posted By</th>";
 				data+=								"</tr>";
@@ -234,6 +264,19 @@ function displayServices(uri){
 				   
 				    for (var i in jsonRecords){
 				    	var id = jsonRecords[i].id;
+				    	var cost = jsonRecords[i].cost;
+				    	var totalPaid = jsonRecords[i].totalPaid;
+				    	
+				    	if(cost=='null')
+				    		cost = 0;
+				    	if(totalPaid=='null')
+				    		totalPaid = 0;
+				    	
+				    	var costFloat, totalPaidFloat;
+				    	costFloat = parseFloat(cost);
+				    	totalPaidFloat = parseFloat(totalPaid);
+				    	
+				    	var balance = costFloat-totalPaidFloat;
 				    	
 				        data+="<tr>";
 				        data+="<td>"+jsonRecords[i].serviceNo+"</td>";
@@ -242,11 +285,14 @@ function displayServices(uri){
 				        data+="<td>"+jsonRecords[i].fullName+"</td>";
 				        data+="<td>"+jsonRecords[i].phone+"</td>";
 				        data+="<td>"+jsonRecords[i].description+"</td>";
+				        data+="<td>$"+jsonRecords[i].cost+"</td>";
+				        data+="<td>$"+jsonRecords[i].totalPaid+"</td>";
+				        data+="<td>$"+balance+"</td>";
 				        data+="<td>"+jsonRecords[i].serviceComplete+"</td>";
 				        data+="<td>"+jsonRecords[i].postedBy+", on "+jsonRecords[i].dateUpdated+" at "+jsonRecords[i].timeUpdated+"</td>";
 				        
-				        data+="<td><a class=\"btn btn-warning btn-block btn-xs\" onclick=\"editPerson("+id+");\">Edit</a></td>";
-				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deletePerson("+id+");\">Delete</a></td>";
+				        //data+="<td><a class=\"btn btn-warning btn-block btn-xs\" onclick=\"editPerson("+id+");\">Edit</a></td>";
+				        //data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"delete("+id+");\">Delete</a></td>";
 				        data+="</tr>";
 				        
 				    }
@@ -305,6 +351,9 @@ function displayPendingServices(uri){
 				data+=									"<th>Full Name</th>";
 				data+=									"<th>Cell Phone</th>";
 				data+=									"<th>Description</th>";
+				data+=									"<th>Cost</th>";
+				data+=									"<th>Total Paid</th>";
+				data+=									"<th>Balance</th>";
 				data+=									"<th>Complete?</th>";
 				data+=									"<th>Posted By</th>";
 				data+=								"</tr>";
@@ -317,6 +366,9 @@ function displayPendingServices(uri){
 				data+=									"<th>Full Name</th>";
 				data+=									"<th>Cell Phone</th>";
 				data+=									"<th>Description</th>";
+				data+=									"<th>Cost</th>";
+				data+=									"<th>Total Paid</th>";
+				data+=									"<th>Balance</th>";
 				data+=									"<th>Complete?</th>";
 				data+=									"<th>Posted By</th>";
 				data+=								"</tr>";
@@ -330,6 +382,19 @@ function displayPendingServices(uri){
 				   
 				    for (var i in jsonRecords){
 				    	var id = jsonRecords[i].id;
+				    	var cost = jsonRecords[i].cost;
+				    	var totalPaid = jsonRecords[i].totalPaid;
+				    	
+				    	if(cost=='null')
+				    		cost = 0;
+				    	if(totalPaid=='null')
+				    		totalPaid = 0;
+				    	
+				    	var costFloat, totalPaidFloat;
+				    	costFloat = parseFloat(cost);
+				    	totalPaidFloat = parseFloat(totalPaid);
+				    	
+				    	var balance = costFloat-totalPaidFloat;
 				    	
 				        data+="<tr>";
 				        data+="<td>"+jsonRecords[i].serviceNo+"</td>";
@@ -338,11 +403,14 @@ function displayPendingServices(uri){
 				        data+="<td>"+jsonRecords[i].fullName+"</td>";
 				        data+="<td>"+jsonRecords[i].phone+"</td>";
 				        data+="<td>"+jsonRecords[i].description+"</td>";
+				        data+="<td>$"+jsonRecords[i].cost+"</td>";
+				        data+="<td>$"+jsonRecords[i].totalPaid+"</td>";
+				        data+="<td>$"+balance+"</td>";
 				        data+="<td>"+jsonRecords[i].serviceComplete+"</td>";
 				        data+="<td>"+jsonRecords[i].postedBy+", on "+jsonRecords[i].dateUpdated+" at "+jsonRecords[i].timeUpdated+"</td>";
 				        
 				        data+="<td><a class=\"btn btn-warning btn-block btn-xs\" onclick=\"editPerson("+id+");\">Edit</a></td>";
-				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deletePerson("+id+");\">Delete</a></td>";
+				        data+="<td><a class=\"btn btn-danger btn-block btn-xs\" onclick=\"deleteService("+id+");\">Cancel</a></td>";
 				        data+="</tr>";
 				        
 				    }
@@ -559,9 +627,6 @@ function displayAccountDetails(uri){
 				
 				var jsonRecords = JSON.parse(response);
 				
-			    
-			      
-			    
 				var data = "";//"<div class='page animsition'>";
 				data+=				"<div class='page-header'>";
 				data+=					"<h1 class='page-title font-size-26 font-weight-100'>Account Details</h1>";
@@ -662,4 +727,79 @@ function viewAccountDetails(){
 
 	displayAccountDetails('./payments/accountdetails');
 	
+}
+
+function deleteS(id, uName){
+	bootbox.alert("Bullshit"+uri+uName);
+}
+
+
+//DELETE
+function deleteUser(id){
+	var uri = './users/deleteUser?deleteId='+id;
+    var reloadId = 2;
+    var message = "User Deletion successful";
+    deleteStuff(uri, message, reloadId);
+}
+
+function deleteStaff(id){
+	var uri = './registerPerson/deleteStaff?deleteId='+id;
+	var reloadId = 1;
+	var message = "Staff Deletion successful";
+    deleteStuff(uri, message, reloadId);
+}
+
+function deleteService(id){
+	var uri = './services/deleteService?deleteId='+id;
+    var reloadId = 5;
+    var message = "Service Cancellation successful";
+    deleteStuff(uri, message, reloadId);
+}
+
+function deleteStuff(uri, message, reloadId){
+	
+	bootbox.confirm('Are you sure you want to do delete operation?', function(result){
+		if(result){
+			
+			var ajax = new XMLHttpRequest();
+			
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState<4)
+					getElById('ajax-form-content').innerHTML = "<img src='assets/images/AjaxLoader.gif' width='20px' height='20px'/> Deleting...";
+				
+				if(ajax.readyState == 4){
+					if(ajax.status == 200){
+						bootbox.alert(message);
+						if(reloadId == 1)
+							viewPeople();
+						else if(reloadId == 2)
+							viewUsers();
+						else if(reloadId == 3)
+							viewServices();
+						else if(reloadId == 4)
+							viewPayments();
+						else if(reloadId == 5)
+							pendingServices();
+						
+					}
+					else{
+						bootbox.alert("Delete operation failed! An error occured!");
+						if(reloadId == 1)
+							viewStaff();
+						else if(reloadId == 2)
+							viewUsers();
+						else if(reloadId == 3)
+							viewServices();
+						else if(reloadId == 4)
+							viewPayments();
+						else if(reloadId == 5)
+							pendingServices();
+					}
+				}
+			}
+			ajax.open('GET', uri, true);
+			ajax.send();
+			
+		}
+	});
 }

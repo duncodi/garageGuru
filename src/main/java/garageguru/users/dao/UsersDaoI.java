@@ -12,4 +12,6 @@ public interface UsersDaoI {
 	
 	int countAllUsers(String uniqueLink);
 	List<Users> allUsersInJson(Users allUsers, String uniqueLink);
+	
+	int deleteUser(Long id);
 }

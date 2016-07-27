@@ -1,5 +1,7 @@
 package garageguru.services.bean;
 
+import java.util.List;
+
 import garageguru.services.model.Services;
 
 public interface ServicesBeanI {
@@ -11,5 +13,9 @@ public interface ServicesBeanI {
 	
 	String pendingServicesInJson(String uniqueLink);
 	
-	int completeService(String completeService, String serviceNo, String confirmationLink);
+	int completeService(String completeService, Long totalPaid, String serviceNo, String confirmationLink);
+	
+	int deleteService(Long id, String uniqueLink);
+	
+	List getCost(String serviceNo);
 }

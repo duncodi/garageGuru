@@ -60,4 +60,9 @@ public class UsersBean implements UsersBeanI {
 		return sb.toString();
 		
 	}
+
+	@Override
+	public int deleteUser(Long id) {
+		return usersDao.deleteUser(id);
+	}
 }

@@ -490,11 +490,20 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
+                  <a class="animsition-link" onclick="updateCost();">
+                    <span class="site-menu-title">Update Service Cost</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
                   <a class="animsition-link" onclick="createPayment();">
                     <span class="site-menu-title">New Payment</span>
                   </a>
                 </li>
-                
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="createDebit();">
+                    <span class="site-menu-title">New Debit</span>
+                  </a>
+                </li>
                 
               </ul>
             </li>
@@ -676,7 +685,8 @@
           <div class="widget widget-shadow" id="widgetStatistic">
             <div class="widget-content">
               <div class="row no-space height-full" data-plugin="matchHeight">
-                <div id="ajax-form-content" class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                <div id="ajax-form-content" class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+			
 
                 </div>
                
@@ -746,7 +756,7 @@
   <script src="assets/js/components/jquery-placeholder.min.js"></script>
   
   <script src="assets/js/more/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  
+  <script src="assets/js/more/bootstrap-datepicker/bootstrap-datepicker.min3f0d.js"></script>
   
   <script>
     (function(document, window, $) {

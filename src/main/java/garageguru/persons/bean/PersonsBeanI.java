@@ -8,5 +8,7 @@ public interface PersonsBeanI {
 
 	String allStaffInJson(String uniqueLink);
 	
+	int deleteStaff(Long id, String uniqueLink);
+	
 	//List<Persons> staff(String uniqueLink);
 }

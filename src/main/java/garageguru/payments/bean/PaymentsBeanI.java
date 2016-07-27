@@ -18,6 +18,16 @@ public interface PaymentsBeanI {
 	int countAllDebits(String confirmationLink);
 	List sumAllCredits(String confirmationLink);
 	List sumAllDebits(String confirmationLink);
+	
+	int updateCost(String confirmationKey, String serviceNo, Long cost);
 
 	List<Payments> paymentsList();
+	
+	List getTotalPayments(String serviceNo);
+	
+	List getTotalDebits(String serviceNo);
+	
+	int countTotalCredits(String serviceNo);
+	
+	int countTotalDebits(String serviceNo);
 }

@@ -147,6 +147,9 @@ public class Users implements Serializable{
 			.append("\"dateUpdated\": \"").append(getDateAndStatus().getDateUpdated()).append("\", ")
 			.append("\"timeUpdated\": \"").append(getDateAndStatus().getTimeUpdated()).append("\", ")
 			.append("\"activeStatus\": \"").append(getDateAndStatus().getActiveStatus()).append("\", ")
+			//.append("\"firstName\": \"").append(person.getFirstName()).append("\", ")
+			//.append("\"secondName\": \"").append(person.getSecondName()).append("\", ")
+			//.append("\"idNumber\": \"").append(person.getIdNumber()).append("\", ")
 			.append("\"id\": \"").append(getId()).append("\"")
 			
 		.append("}");

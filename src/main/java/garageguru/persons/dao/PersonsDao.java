@@ -5,6 +5,7 @@ import garageguru.persons.model.Persons;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import garageguru.persons.model.Persons;
 
 import javax.persistence.EntityManager;
@@ -37,6 +38,14 @@ public class PersonsDao implements PersonsDaoI{
 		
 		return ((Long) result.get(0)).intValue();
 		
+	}
+
+	@Override
+	public int deleteStaff(Long id, String uniqueLink) {
+		Query query = em.createQuery("delete from Persons where id=:id and confirmationLink=:uniqueLink");
+		query.setParameter("id", id);
+		query.setParameter("uniqueLink", uniqueLink);
+		return query.executeUpdate();
 	}
 
 }

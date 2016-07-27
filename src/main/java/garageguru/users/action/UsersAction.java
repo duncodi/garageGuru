@@ -2,6 +2,7 @@ package garageguru.users.action;
 
 import garageguru.common.model.CommonFields;
 import garageguru.garages.model.Garages;
+import garageguru.persons.bean.PersonsBeanI;
 import garageguru.persons.model.Persons;
 import garageguru.users.bean.UsersBeanI;
 import garageguru.users.model.Users;
@@ -29,12 +30,31 @@ public class UsersAction extends HttpServlet{
 	@EJB
 	private UsersBeanI usersBean;
 	
+	@EJB
+	private PersonsBeanI personsBean;
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//get all our garage staff
 		HttpSession session = request.getSession();
 		String uniqueLink = session.getAttribute("uniqueLink").toString();
 		
-		this.users(response, uniqueLink);
+		PrintWriter resp = response.getWriter();
+		
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+		
+		if(path.equalsIgnoreCase("newUser")){
+			//persons list dropdown;
+			this.persons(response, uniqueLink);
+		}
+		else if(path.equalsIgnoreCase("deleteUser")){
+			String idStr = request.getParameter("deleteId");
+			Long id = Long.parseLong(idStr);
+			this.deleteUser(response, id);
+		}
+		else{
+			this.users(response, uniqueLink);
+		}
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -61,7 +81,7 @@ public class UsersAction extends HttpServlet{
 		password = hash(password);
 		personId = request.getParameter("personId");
 		//garageId = request.getParameter("garageId"); TODO
-		userlevel = "User";
+		userlevel = request.getParameter("userLevel");
 		loggedIn = 0;
 		activeStatus = 1;
 		
@@ -80,6 +100,10 @@ public class UsersAction extends HttpServlet{
 		
 	}
 	
+	public void deleteUser(HttpServletResponse response, Long id) throws ServletException, IOException{
+		usersBean.deleteUser(id);
+	}
+	
 	private static String hash(String s) {
 		try {
 			MessageDigest m = MessageDigest.getInstance("SHA-512");
@@ -94,6 +118,10 @@ public class UsersAction extends HttpServlet{
 	public void users(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
 		PrintWriter resp = response.getWriter();
 		resp.println(usersBean.allUsersInJson(uniqueLink));
-		
+	}
+	
+	public void persons(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
+		PrintWriter resp = response.getWriter();
+		resp.println(personsBean.allStaffInJson(uniqueLink));
 	}
 }

@@ -28,4 +28,14 @@ public interface PaymentsDaoI {
 	//rest
 	List<Payments> paymentsList(Payments paymentsList);
 	
+	int updateCost(String confirmationKey, String serviceNo, Long cost);
+	
+	List getTotalPayments(String serviceNo);
+	
+	List getTotalDebits(String serviceNo);
+	
+	int countTotalCredits(String serviceNo);
+	
+	int countTotalDebits(String serviceNo);
+	
 }

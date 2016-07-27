@@ -3,6 +3,7 @@ package garageguru.persons.bean;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -60,6 +61,12 @@ public class PersonsBean implements PersonsBeanI {
 		sb.append("]");
 		return sb.toString();
 		
+	}
+
+	@Override
+	public int deleteStaff(Long id, String uniqueLink) {
+		// TODO Auto-generated method stub
+		return personsDao.deleteStaff(id, uniqueLink);
 	}
 	
 }

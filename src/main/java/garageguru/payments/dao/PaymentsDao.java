@@ -117,6 +117,59 @@ public class PaymentsDao implements PaymentsDaoI {
 		
 		return query.getResultList();
 	}
+
+	@Override
+	public int updateCost(String confirmationKey, String serviceNo, Long cost) {
+		String serviceComplete = "No";
+		Query query = em.createQuery("update Services set cost=:cost where confirmationLink=:confirmationKey AND serviceNo=:serviceNo AND serviceComplete=:serviceComplete");
+		query.setParameter("cost", cost);
+		query.setParameter("confirmationKey", confirmationKey);
+		query.setParameter("serviceNo", serviceNo);
+		query.setParameter("serviceComplete", serviceComplete);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public List getTotalPayments(String serviceNo) {
+		String type = "Credit";
+		Query query = em.createQuery("select sum(amount) from Payments where serviceNo=:serviceNo AND transactionType=:type");
+		query.setParameter("serviceNo", serviceNo);
+		query.setParameter("type", type);
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public List getTotalDebits(String serviceNo) {
+		String type = "Debit";
+		Query query = em.createQuery("select sum(amount) from Payments where serviceNo=:serviceNo AND transactionType=:type");
+		query.setParameter("serviceNo", serviceNo);
+		query.setParameter("type", type);
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public int countTotalCredits(String serviceNo) {
+		String type = "Credit";
+		Query query = em.createQuery("select count(id) from Payments where serviceNo=:serviceNo AND transactionType=:type");
+		query.setParameter("serviceNo", serviceNo);
+		query.setParameter("type", type);
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
+
+	@Override
+	public int countTotalDebits(String serviceNo) {
+		String type = "Debit";
+		Query query = em.createQuery("select count(id) from Payments where serviceNo=:serviceNo AND transactionType=:type");
+		query.setParameter("serviceNo", serviceNo);
+		query.setParameter("type", type);
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
 	
 	
 

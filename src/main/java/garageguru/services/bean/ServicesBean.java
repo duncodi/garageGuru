@@ -68,8 +68,8 @@ public class ServicesBean implements ServicesBeanI{
 	}
 
 	@Override
-	public int completeService(String completeService, String serviceNo, String confirmationLink) {
-		return servicesDao.completeService(completeService, serviceNo, confirmationLink);
+	public int completeService(String completeService, Long totalPaid, String serviceNo, String confirmationLink) {
+		return servicesDao.completeService(completeService, totalPaid, serviceNo, confirmationLink);
 	}
 
 	@Override
@@ -90,6 +90,16 @@ public class ServicesBean implements ServicesBeanI{
 		}
 		sb.append("]");
 		return sb.toString();
+	}
+
+	@Override
+	public int deleteService(Long id, String uniqueLink) {
+		return servicesDao.deleteService(id, uniqueLink);
+	}
+
+	@Override
+	public List getCost(String serviceNo) {
+		return servicesDao.getCost(serviceNo);
 	}
 	
 	

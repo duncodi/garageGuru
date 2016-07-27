@@ -51,8 +51,30 @@ public class Services implements Serializable {
 	@Column
 	private String serviceComplete;
 	
+	@Column
+	private Long cost;
+	
+	@Column
+	private Long totalPaid;
 	
 	
+	
+	public Long getTotalPaid() {
+		return totalPaid;
+	}
+
+	public void setTotalPaid(Long totalPaid) {
+		this.totalPaid = totalPaid;
+	}
+
+	public Long getCost() {
+		return cost;
+	}
+
+	public void setCost(Long cost) {
+		this.cost = cost;
+	}
+
 	public String getServiceComplete() {
 		return serviceComplete;
 	}
@@ -152,6 +174,8 @@ public class Services implements Serializable {
 			.append("\"phone\": \"").append(getPhone()).append("\", ")
 			.append("\"description\": \"").append(getDescription()).append("\", ")
 			.append("\"confirmationLink\": \"").append(getConfirmationLink()).append("\", ")
+			.append("\"cost\": \"").append(getCost()).append("\", ")
+			.append("\"totalPaid\": \"").append(getTotalPaid()).append("\", ")
 			.append("\"dateUpdated\": \"").append(getDateAndStatus().getDateUpdated()).append("\", ")
 			.append("\"timeUpdated\": \"").append(getDateAndStatus().getTimeUpdated()).append("\", ")
 			.append("\"postedBy\": \"").append(getPostedBy()).append("\", ")

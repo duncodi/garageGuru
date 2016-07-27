@@ -19,5 +19,9 @@ public interface ServicesDaoI {
 	List<Services> allServicesInJson(Services allServices, String uniqueLink);
 	List<Services> pendingServicesInJson(Services pendingServices, String uniqueLink);
 	
-	int completeService(String completeService, String serviceNo, String confirmationLink);
+	int completeService(String completeService, Long totalPaid, String serviceNo, String confirmationLink);
+	
+	int deleteService(Long id, String uniqueLink);
+	
+	List getCost(String serviceNo);
 }

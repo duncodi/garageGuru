@@ -37,4 +37,11 @@ public class UsersDao implements UsersDaoI{
 		return ((Long) result.get(0)).intValue();
 		
 	}
+
+	@Override
+	public int deleteUser(Long id) {
+		Query query = em.createQuery("delete from Users where id=:id");
+		query.setParameter("id", id);
+		return query.executeUpdate();
+	}
 }

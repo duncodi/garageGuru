@@ -44,7 +44,13 @@ public class ServicesAction extends HttpServlet {
 			
 			this.pendingServices(response, uniqueLink);
 			
-		}else{
+		}
+		else if(path.equalsIgnoreCase("deleteService")){
+			String idStr = request.getParameter("deleteId");
+			Long id = Long.parseLong(idStr);
+			this.deleteService(response, id, uniqueLink);
+		}
+		else{
 			this.services(response, uniqueLink);
 		}
 		
@@ -91,6 +97,7 @@ public class ServicesAction extends HttpServlet {
 		description = request.getParameter("description").toUpperCase();
 		activeStatus = 1;
 		serviceComplete = "No";
+		Long cost = (long) 0;
 		
 		service.setDateAndStatus(new CommonFields());
 		service.getDateAndStatus().setActiveStatus(activeStatus);
@@ -106,7 +113,9 @@ public class ServicesAction extends HttpServlet {
 		service.setPostedBy(postedBy);	
 		service.setConfirmationLink(confirmationKey);
 		service.setServiceComplete(serviceComplete);
-		
+		service.setCost(cost);
+		service.setTotalPaid(cost);//zero
+				
 		servicesBean.add(service);
 		
 	}
@@ -120,5 +129,9 @@ public class ServicesAction extends HttpServlet {
 		PrintWriter resp = response.getWriter();
 		resp.println(servicesBean.pendingServicesInJson(uniqueLink));
 		
+	}
+	
+	public void deleteService(HttpServletResponse response, Long id, String uniqueLink){
+		servicesBean.deleteService(id, uniqueLink);
 	}
 }

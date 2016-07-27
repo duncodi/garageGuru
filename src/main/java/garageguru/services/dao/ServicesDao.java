@@ -47,9 +47,10 @@ public class ServicesDao implements ServicesDaoI{
 	}
 
 	@Override
-	public int completeService(String completeService, String serviceNo, String confirmationLink) {
-		Query query = em.createQuery("update Services set serviceComplete=:serviceComplete where confirmationLink=:confirmationLink AND serviceNo=:serviceNo");
+	public int completeService(String completeService, Long totalPaid, String serviceNo, String confirmationLink) {
+		Query query = em.createQuery("update Services set serviceComplete=:serviceComplete, totalPaid=:totalPaid where confirmationLink=:confirmationLink AND serviceNo=:serviceNo");
 		query.setParameter("serviceComplete", completeService);
+		query.setParameter("totalPaid", totalPaid);
 		query.setParameter("confirmationLink", confirmationLink);
 		query.setParameter("serviceNo", serviceNo);
 		
@@ -59,7 +60,7 @@ public class ServicesDao implements ServicesDaoI{
 	@Override
 	public int countPendingServices(String uniqueLink) {
 		String serviceComplete = "No";
-		Query query = em.createQuery("select count(id) from Services where confirmationLink=:uniqueLink AND serviceComplete=:serviceComplete");
+		Query query = em.createQuery("select count(id) from Services where confirmationLink=:uniqueLink AND (serviceComplete=:serviceComplete OR totalPaid>cost)");
 		query.setParameter("uniqueLink", uniqueLink);
 		query.setParameter("serviceComplete", serviceComplete);
 		List result = query.getResultList();
@@ -70,10 +71,27 @@ public class ServicesDao implements ServicesDaoI{
 	@Override
 	public List<Services> pendingServicesInJson(Services pendingServices, String uniqueLink) {
 		String serviceComplete = "No";
-		Query query = em.createQuery("from Services where confirmationLink=:uniqueLink AND serviceComplete=:serviceComplete");
+		Query query = em.createQuery("from Services where confirmationLink=:uniqueLink AND (serviceComplete=:serviceComplete OR totalPaid>cost)");
 		query.setParameter("uniqueLink", uniqueLink);
 		query.setParameter("serviceComplete", serviceComplete);
 		
+		return query.getResultList();
+	}
+
+	@Override
+	public int deleteService(Long id, String uniqueLink) {
+		String serviceComplete = "No";
+		Query query = em.createQuery("delete from Services where id=:id and confirmationLink=:uniqueLink and serviceComplete=:serviceComplete");
+		query.setParameter("id", id);
+		query.setParameter("uniqueLink", uniqueLink);
+		query.setParameter("serviceComplete", serviceComplete);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public List getCost(String serviceNo) {
+		Query query = em.createQuery("select cost from Services where serviceNo=:serviceNo");
+		query.setParameter("serviceNo", serviceNo);
 		return query.getResultList();
 	}
 }

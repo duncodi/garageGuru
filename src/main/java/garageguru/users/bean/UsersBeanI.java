@@ -6,4 +6,6 @@ public interface UsersBeanI {
 	void add(Users user);
 
 	String allUsersInJson(String uniqueLink);
+	
+	int deleteUser(Long id);
 }

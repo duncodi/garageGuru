@@ -38,82 +38,154 @@ public class PaymentsAction extends HttpServlet{
 		HttpSession session = request.getSession();
 		String uniqueLink = session.getAttribute("uniqueLink").toString();
 		
-		/*int maxServiceNo = paymentsBean.returnMaxServiceNo(uniqueLink);
-		
-		resp.println("Size: "+maxServiceNo);
-		*/
-		
 		String [] pathCmp = request.getRequestURI().split("/");
 		String path = pathCmp[pathCmp.length-1];
 		
 		if(path.equalsIgnoreCase("ministatement")){
-			
-			this.ministatement(response, uniqueLink);
-			
-		}else if(path.equalsIgnoreCase("accountdetails")){
+			this.ministatement(response, uniqueLink);	
+		}
+		else if(path.equalsIgnoreCase("accountdetails")){
 			this.accountDetails(response, uniqueLink);
-		}		
+		}
+		else if(path.equalsIgnoreCase("newPayment")){
+			this.services(response, uniqueLink);
+		}
 		else{
 			this.payments(response, uniqueLink);
 		}
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		Payments payment = new Payments();
-		Garages garage = new Garages();
-				
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, 1);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String dateUpdated = format.format(cal.getTime());
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+		
+		if(path.equalsIgnoreCase("updateCost")){
+			this.updateCost(request, response);	
+		}
+		else{
+			Payments payment = new Payments();
+			Garages garage = new Garages();
+					
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, 1);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String dateUpdated = format.format(cal.getTime());
 
-		SimpleDateFormat timeformat = new SimpleDateFormat("h:m:s");
-		String timeUpdated = timeformat.format(cal.getTime());
+			SimpleDateFormat timeformat = new SimpleDateFormat("h:m:s");
+			String timeUpdated = timeformat.format(cal.getTime());
+			
+			
+			String serviceNo, narration, completeService, postedBy, confirmationKey, transactionType;
+			int activeStatus;
+			Long amount, refNo;
+			
+			HttpSession session = request.getSession();
+			confirmationKey = session.getAttribute("uniqueLink").toString();
+			postedBy = session.getAttribute("user").toString();
+			
+			// get garageId
+			List getGarageId = registrationBean.getGarageId(confirmationKey);
+			Long garageId;
+			garageId = (Long) getGarageId.get(0);
+			
+			//count to get maximum service id for this garage
+			int maxRefNo = paymentsBean.returnMaxRefNo(confirmationKey); //counts
+			refNo = (long) (maxRefNo+1);
+			String constStr = "GPS";
+			String refNoStr = constStr+(garageId.toString())+"-"+(refNo.toString()); //create a garage-custom service No.
+			
+			amount = Long.parseLong(request.getParameter("amount"));
+			serviceNo = request.getParameter("serviceNo").toUpperCase();
+			serviceNo = serviceNo.trim();
+			narration = request.getParameter("narration").toUpperCase();
+			//completeService = request.getParameter("completeService");
+			activeStatus = 1;
+			transactionType = request.getParameter("transactionType");
+			
+			payment.setDateAndStatus(new CommonFields());
+			payment.getDateAndStatus().setActiveStatus(activeStatus);
+			payment.getDateAndStatus().setDateUpdated(dateUpdated);
+			payment.getDateAndStatus().setTimeUpdated(timeUpdated);
+			
+			payment.setTransactionType(transactionType);
+			payment.setRefNo(refNoStr);
+			payment.setAmount(amount);
+			payment.setServiceNo(serviceNo);
+			payment.setNarration(narration);
+			payment.setPostedBy(postedBy);	
+			payment.setConfirmationLink(confirmationKey);
+			
+			
+			//check if amount<=cost;
+			Long totalPaid, totalCost, credits, debits;
+			totalCost = this.getCost(response, serviceNo);						
+			credits = this.getTotalPayments(response, serviceNo);
+			debits = this.getTotalDebits(response, serviceNo);
+			
+			if(transactionType.equalsIgnoreCase("Debit"))
+				totalPaid = credits-(amount+debits);
+			else
+				totalPaid = (credits+amount)-debits;
+			
+			
+			if(totalPaid<totalCost){
+				paymentsBean.add(payment);
+				completeService = "No";
+				servicesBean.completeService(completeService, totalPaid, serviceNo, confirmationKey);
+			}
+			else{
+				paymentsBean.add(payment);
+				completeService = "Yes";
+				servicesBean.completeService(completeService, totalPaid, serviceNo, confirmationKey);
+			}
+				
+		}
 		
-		
-		String serviceNo, narration, completeService, postedBy, confirmationKey, transactionType;
-		int activeStatus;
-		Long amount, refNo;
-		
+	}
+	
+	public void updateCost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String confirmationKey, serviceNo;
+		Long cost;
 		HttpSession session = request.getSession();
 		confirmationKey = session.getAttribute("uniqueLink").toString();
-		postedBy = session.getAttribute("user").toString();
+		serviceNo = request.getParameter("serviceNo");
+		cost = Long.parseLong(request.getParameter("cost"));
+		paymentsBean.updateCost(confirmationKey, serviceNo, cost);
+	}
+	
+	public Long getCost(HttpServletResponse response, String serviceNo) throws ServletException, IOException {
+		List CostLs = servicesBean.getCost(serviceNo);
+		Long cost = (Long) CostLs.get(0);
+		if(CostLs==null)
+			cost = (long) 0;
 		
-		// get garageId
-		List getGarageId = registrationBean.getGarageId(confirmationKey);
-		Long garageId;
-		garageId = (Long) getGarageId.get(0);
+		return cost;
+	}
+	
+	public Long getTotalPayments(HttpServletResponse response, String serviceNo) throws ServletException, IOException {
+		int countCredits = paymentsBean.countTotalCredits(serviceNo);
+		List totalPaymentsLs = paymentsBean.getTotalPayments(serviceNo);
+		Long payments = (Long) totalPaymentsLs.get(0);
+		if(countCredits==0)
+			payments = (long) 0;
 		
-		//count to get maximum service id for this garage
-		int maxRefNo = paymentsBean.returnMaxRefNo(confirmationKey); //counts
-		refNo = (long) (maxRefNo+1);
-		String constStr = "GPS";
-		String refNoStr = constStr+(garageId.toString())+"-"+(refNo.toString()); //create a garage-custom service No.
+		return payments;
+	}
+	
+	public Long getTotalDebits(HttpServletResponse response, String serviceNo) throws ServletException, IOException {
+		int countDebits = paymentsBean.countTotalDebits(serviceNo);
+		List totalDebitsLs = paymentsBean.getTotalDebits(serviceNo);
+		Long debits = (Long) totalDebitsLs.get(0);
 		
-		amount = Long.parseLong(request.getParameter("amount"));
-		serviceNo = request.getParameter("serviceNo").toUpperCase();
-		serviceNo = serviceNo.trim();
-		narration = request.getParameter("narration");
-		completeService = request.getParameter("completeService");
-		activeStatus = 1;
-		transactionType = "Credit";
+		if(countDebits==0)
+			debits = (long) 0;
 		
-		payment.setDateAndStatus(new CommonFields());
-		payment.getDateAndStatus().setActiveStatus(activeStatus);
-		payment.getDateAndStatus().setDateUpdated(dateUpdated);
-		payment.getDateAndStatus().setTimeUpdated(timeUpdated);
-		
-		payment.setTransactionType(transactionType);
-		payment.setRefNo(refNoStr);
-		payment.setAmount(amount);
-		payment.setServiceNo(serviceNo);
-		payment.setNarration(narration);
-		payment.setPostedBy(postedBy);	
-		payment.setConfirmationLink(confirmationKey);
-		
-		paymentsBean.add(payment);
-		servicesBean.completeService(completeService, serviceNo, confirmationKey);
-		
+		return debits;
+	}
+	
+	public void services(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
+		PrintWriter resp = response.getWriter();
+		resp.println(servicesBean.pendingServicesInJson(uniqueLink));
 	}
 	
 	public void payments(HttpServletResponse response, String uniqueLink) throws ServletException, IOException {
