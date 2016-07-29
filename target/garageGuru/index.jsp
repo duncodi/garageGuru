@@ -492,11 +492,6 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" onclick="testThis();">
-                    <span class="site-menu-title">Analysis</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
                   <a class="animsition-link" onclick="createService();">
                     <span class="site-menu-title">New Service</span>
                   </a>

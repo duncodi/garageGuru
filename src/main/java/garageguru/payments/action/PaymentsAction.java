@@ -115,32 +115,35 @@ public class PaymentsAction extends HttpServlet{
 			payment.setPostedBy(postedBy);	
 			payment.setConfirmationLink(confirmationKey);
 			
-			
-			//check if amount<=cost;
-			Long totalPaid, totalCost, credits, debits;
-			totalCost = this.getCost(response, serviceNo);						
-			credits = this.getTotalPayments(response, serviceNo);
-			debits = this.getTotalDebits(response, serviceNo);
-			
-			if(transactionType.equalsIgnoreCase("Debit"))
-				totalPaid = credits-(amount+debits);
-			else
-				totalPaid = (credits+amount)-debits;
-			
-			
-			if(totalPaid<totalCost){
+			if(serviceNo.equalsIgnoreCase("None"))
 				paymentsBean.add(payment);
-				completeService = "No";
-				servicesBean.completeService(completeService, totalPaid, serviceNo, confirmationKey);
-			}
-			else if(totalPaid>=totalCost){
-				paymentsBean.add(payment);
-				completeService = "Yes";
-				servicesBean.completeService(completeService, totalPaid, serviceNo, confirmationKey);
-			}
 			else{
-				paymentsBean.add(payment);
+				//check if amount<=cost;
+				Long totalPaid, totalCost, credits, debits;
+				totalCost = this.getCost(response, serviceNo);	
+				credits = this.getTotalPayments(response, serviceNo);
+				debits = this.getTotalDebits(response, serviceNo);
+				
+				if(transactionType.equalsIgnoreCase("Debit"))
+					totalPaid = credits-(amount+debits);
+				else
+					totalPaid = (credits+amount)-debits;
+				
+			
+				if (totalPaid < totalCost) {
+					paymentsBean.add(payment);
+					completeService = "No";
+					servicesBean.completeService(completeService, totalPaid,
+							serviceNo, confirmationKey);
+				} else {
+					paymentsBean.add(payment);
+					completeService = "Yes";
+					servicesBean.completeService(completeService, totalPaid,
+							serviceNo, confirmationKey);
+				}
+							
 			}
+			
 				
 		}
 		
@@ -159,7 +162,7 @@ public class PaymentsAction extends HttpServlet{
 	public Long getCost(HttpServletResponse response, String serviceNo) throws ServletException, IOException {
 		List CostLs = servicesBean.getCost(serviceNo);
 		Long cost = (Long) CostLs.get(0);
-		if(CostLs==null)
+		if(CostLs==null || serviceNo.equalsIgnoreCase("None"))
 			cost = (long) 0;
 		
 		return cost;
