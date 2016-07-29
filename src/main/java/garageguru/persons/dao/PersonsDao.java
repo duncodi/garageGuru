@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import garageguru.persons.model.Persons;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 public class PersonsDao implements PersonsDaoI{
 	private EntityManager em;
 	
@@ -47,5 +48,22 @@ public class PersonsDao implements PersonsDaoI{
 		query.setParameter("uniqueLink", uniqueLink);
 		return query.executeUpdate();
 	}
+
+	//for rest
+	
+	@Override
+	public List<Persons> allStaffList(Persons allStaff) {
+		String uniqueLink;
+		HttpSession session = null;
+		uniqueLink = session.getAttribute("uniqueLink").toString();
+		
+		Query query = em.createQuery("from Persons where confirmationLink=:uniqueLink");
+		query.setParameter("uniqueLink", uniqueLink);
+		
+		return query.getResultList();
+	}
+	
+	
+	
 
 }

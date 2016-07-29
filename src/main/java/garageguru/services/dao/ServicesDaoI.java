@@ -24,4 +24,5 @@ public interface ServicesDaoI {
 	int deleteService(Long id, String uniqueLink);
 	
 	List getCost(String serviceNo);
+	
 }

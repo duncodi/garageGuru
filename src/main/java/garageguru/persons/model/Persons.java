@@ -16,9 +16,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Null;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 @Table(name = "all_persons")
+@XmlRootElement
+@JsonInclude(Include.NON_EMPTY)
 public class Persons implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -133,7 +140,7 @@ public class Persons implements Serializable{
 	
 	/////
 
-	
+	@JsonIgnore
 	public String getJson(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("{")

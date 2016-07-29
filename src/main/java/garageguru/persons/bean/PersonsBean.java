@@ -35,13 +35,6 @@ public class PersonsBean implements PersonsBeanI {
 		
 		personsDao.add(person);
 	}
-	/*
-	@Override
-	public List<Persons> staff(String uniqueLink) {
-		// TODO Auto-generated method stub
-		return personsDao.staff(new Persons(), uniqueLink);
-	}
-	*/
 	
 	public String allStaffInJson(String uniqueLink) {
 		Persons filter = new Persons();
@@ -69,4 +62,10 @@ public class PersonsBean implements PersonsBeanI {
 		return personsDao.deleteStaff(id, uniqueLink);
 	}
 	
+	//for rest
+	@Override
+	public List<Persons> allStaffList() {
+		// TODO Auto-generated method stub
+		return personsDao.allStaffList(new Persons());
+	}
 }

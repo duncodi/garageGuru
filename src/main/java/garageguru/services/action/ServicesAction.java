@@ -50,6 +50,9 @@ public class ServicesAction extends HttpServlet {
 			Long id = Long.parseLong(idStr);
 			this.deleteService(response, id, uniqueLink);
 		}
+		else if(path.equalsIgnoreCase("serviceAnalysis")){
+			this.serviceAnalysis(response, uniqueLink);
+		}
 		else{
 			this.services(response, uniqueLink);
 		}
@@ -133,5 +136,17 @@ public class ServicesAction extends HttpServlet {
 	
 	public void deleteService(HttpServletResponse response, Long id, String uniqueLink){
 		servicesBean.deleteService(id, uniqueLink);
+	}
+	public void serviceAnalysis(HttpServletResponse response, String uniqueLink) throws ServletException, IOException{
+		PrintWriter resp = response.getWriter();
+		int allServices = servicesBean.countAllServices(uniqueLink);
+		int pendingServices = servicesBean.countPendingServices(uniqueLink);
+		
+		resp.print("[");
+			resp.print("{");
+				resp.print("\"");resp.print("allServices");resp.print("\"");resp.print(": ");resp.print("\"");resp.print(allServices);resp.print("\", ");
+				resp.print("\"");resp.print("pendingServices");resp.print("\"");resp.print(": ");resp.print("\"");resp.print(pendingServices);resp.print("\"");
+			resp.print("}");
+		resp.print("]");
 	}
 }

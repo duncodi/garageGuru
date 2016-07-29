@@ -27,6 +27,7 @@
 /opt/workspace/garageGuru/src/main/java/garageguru/payments/dao/PaymentsDao.java
 /opt/workspace/garageGuru/src/main/java/garageguru/payments/action/PaymentsAction.java
 /opt/workspace/garageGuru/src/main/java/garageguru/payments/dao/PaymentsDaoI.java
+/opt/workspace/garageGuru/src/main/java/garageguru/webservice/rest/PersonsRest.java
 /opt/workspace/garageGuru/src/main/java/garageguru/persons/bean/PersonsBean.java
 /opt/workspace/garageGuru/src/main/java/garageguru/search/action/FilterPaymentsAction.java
 /opt/workspace/garageGuru/src/main/java/garageguru/registration/bean/RegistrationBeanI.java

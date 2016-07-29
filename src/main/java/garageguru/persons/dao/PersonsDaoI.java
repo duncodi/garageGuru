@@ -13,4 +13,6 @@ public interface PersonsDaoI {
 	List<Persons> allStaffInJson(Persons allStaff, String uniqueLink);
 	
 	int deleteStaff(Long id, String uniqueLink);
+	
+	List<Persons> allStaffList(Persons allStaff);
 }

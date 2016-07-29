@@ -133,10 +133,13 @@ public class PaymentsAction extends HttpServlet{
 				completeService = "No";
 				servicesBean.completeService(completeService, totalPaid, serviceNo, confirmationKey);
 			}
-			else{
+			else if(totalPaid>=totalCost){
 				paymentsBean.add(payment);
 				completeService = "Yes";
 				servicesBean.completeService(completeService, totalPaid, serviceNo, confirmationKey);
+			}
+			else{
+				paymentsBean.add(payment);
 			}
 				
 		}
@@ -206,11 +209,11 @@ public class PaymentsAction extends HttpServlet{
 		int countDebits = paymentsBean.countAllDebits(uniqueLink);
 		
 		Long totalCR = (Long) sumCredits.get(0);
-		if(totalCR==null)
+		if(countCredits==0)
 			totalCR = (long) 0;
 		
 		Long totalDR = (Long) sumDebits.get(0);
-		if(totalDR==null)
+		if(countDebits==0)
 			totalDR = (long) 0;
 		
 		//json

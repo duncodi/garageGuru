@@ -101,6 +101,16 @@ public class ServicesBean implements ServicesBeanI{
 	public List getCost(String serviceNo) {
 		return servicesDao.getCost(serviceNo);
 	}
+
+	@Override
+	public int countAllServices(String uniqueLink) {
+		return servicesDao.countAllServices(uniqueLink);
+	}
+
+	@Override
+	public int countPendingServices(String uniqueLink) {
+		return servicesDao.countPendingServices(uniqueLink);
+	}
 	
 	
 }

@@ -18,4 +18,7 @@ public interface ServicesBeanI {
 	int deleteService(Long id, String uniqueLink);
 	
 	List getCost(String serviceNo);
+	
+	int countAllServices(String uniqueLink);
+	int countPendingServices(String uniqueLink);
 }

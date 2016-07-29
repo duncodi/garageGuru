@@ -10,6 +10,7 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/images/logo.png" />
+    
 
 
     <!-- Stylesheets -->
@@ -29,6 +30,12 @@
     
     <script src="assets/js/more/modernizr/modernizr.min.js"></script>
     <script src="assets/js/more/breakpoints/breakpoints.min.js"></script>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+<meta charset=utf-8 />
+    
     <script>
     Breakpoints();
     </script>
@@ -420,11 +427,11 @@
                 </div>
               </a>
               <ul class="site-menu-sub">
-                <li class="site-menu-item active">
-                  <a class="animsition-link" href="index.html">
-                    <span class="site-menu-title">Dashboard</span>
-                  </a>
-                </li>
+               <li class="site-menu-item">
+                      <a class="animsition-link" href="index.jsp">
+                        <span class="site-menu-title">Dashboard</span>
+                      </a>
+               </li>
               </ul>
             </li>
             
@@ -484,6 +491,11 @@
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="testThis();">
+                    <span class="site-menu-title">Analysis</span>
+                  </a>
+                </li>
                 <li class="site-menu-item">
                   <a class="animsition-link" onclick="createService();">
                     <span class="site-menu-title">New Service</span>
@@ -686,8 +698,19 @@
             <div class="widget-content">
               <div class="row no-space height-full" data-plugin="matchHeight">
                 <div id="ajax-form-content" class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
-			
-
+					
+					<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xs-6">
+						<h4>Full Finance Analysis</h4>
+						<div id="donutFinance"></div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xs-6">
+						<h4>Full Services Analysis</h4>
+						<div id="donutServices"></div>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+						<h4>Performance Analysis</h4>
+						<div id="lineGraph"></div>
+					</div>
                 </div>
                
               </div>
@@ -717,6 +740,7 @@
 		<script src="assets/custom/customerSearch.js"></script>
 		<script src="assets/custom/customServicesFilter.js"></script>
 		<script src="assets/custom/customPaymentsFilter.js"></script>
+		<script src="assets/custom/graph.js"></script>
 	<!-- --- -->
   
   <!-- Core  -->
@@ -758,6 +782,8 @@
   <script src="assets/js/more/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
   <script src="assets/js/more/bootstrap-datepicker/bootstrap-datepicker.min3f0d.js"></script>
   
+  
+  
   <script>
     (function(document, window, $) {
       'use strict';
@@ -770,3 +796,9 @@
   </script>
 </body>
 </html>
+
+
+
+<script>
+
+</script>
