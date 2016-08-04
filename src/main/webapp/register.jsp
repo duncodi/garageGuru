@@ -53,35 +53,35 @@
         <form method="post" action="#">
           <div class="form-group">
             <label class="sr-only" for="idNumber">Id/Company Reg No.:</label>
-            <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="Id/Company Reg No.">
+            <input type="text" class="form-control" onkeyup="isNull('idNumber');" id="idNumber" name="idNumber" placeholder="Id/Company Reg No.">
           </div>
           <div class="form-group">
             <label class="sr-only" for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+            <input type="text" class="form-control" onkeyup="isNull('firstName');" id="firstName" name="firstName" placeholder="First Name">
           </div>
           <div class="form-group">
             <label class="sr-only" for="secondName">Second Name</label>
-            <input type="text" class="form-control" id="secondName" name="secondName" placeholder="Second Name">
+            <input type="text" class="form-control" onkeyup="isNull('secondName');" id="secondName" name="secondName" placeholder="Second Name">
           </div>
           <div class="form-group">
             <label class="sr-only" for="phone">Cell Phone (+254)</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="Cell Phone (+254) e.g. 712345678">
+            <input type="text" class="form-control" onkeyup="isNull('phone');" id="phone" name="phone" placeholder="Cell Phone (+254) e.g. 712345678">
           </div>
           <div class="form-group">
             <label class="sr-only" for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <input type="email" class="form-control" onkeyup="isNull('email');" id="email" name="email" placeholder="Email">
           </div>
           <div class="form-group">
             <label class="sr-only" for="garageName">Garage Name</label>
-            <input type="text" class="form-control" id="garageName" name="garageName" placeholder="Garage Name">
+            <input type="text" class="form-control" onkeyup="isNull('garageName');" id="garageName" name="garageName" placeholder="Garage Name">
           </div>
           <div class="form-group">
             <label class="sr-only" for="address">Garage Address</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="P.O BOX 111-0000 TOWN">
+            <input type="text" class="form-control" onkeyup="isNull('address');" id="address" name="address" placeholder="P.O BOX 111-0000 TOWN">
           </div>
           <div class="form-group">
             <label class="sr-only" for="location">Garage Location (Town)</label>
-            <select name="location" id="location" class="form-control">
+            <select onchange="isNull('location');" name="location" id="location" class="form-control">
             	<option value="">Where is your garage located?</option>
             	<option value="Nairobi">Nairobi</option>
             	<option value="Nakuru">Nakuru</option>
@@ -90,16 +90,16 @@
           </div>
           <div class="form-group">
             <label class="sr-only" for="country">Country</label>
-            <input type="text" class="form-control" id="country" name="country" value="KENYA" readonly placeholder="Country">
+            <input type="text" class="form-control" onkeyup="isNull('country');" id="country" name="country" value="KENYA" readonly placeholder="Country">
           </div>
           <div class="form-group">
             <label class="sr-only" for="garageDescription">Garage Description</label>
-            <textarea rows="3" name="garageDescription" id="garageDescription" class="form-control" placeholder="Brief Garage Description"></textarea>
+            <textarea rows="3" name="garageDescription" onkeyup="isNull('garageDescription');" id="garageDescription" class="form-control" placeholder="Brief Garage Description"></textarea>
           </div>
          
          
         </form>
-		<a class="btn btn-primary btn-block" onclick="register();">Sign Up</a>
+		<a class="btn btn-primary btn-block" id="signUpButton" onclick="validate();">Sign Up</a>
 		
 		
         <p>You have an account? <a href="login.jsp">Sign In</a></p>
@@ -129,6 +129,7 @@
 	<!-- custom js -->
 		<script src="assets/custom/custom.js"></script>
 		<script src="assets/custom/register.js"></script>
+		<script src="assets/custom/validate.js"></script>
 	<!-- --- -->
 
   <!-- Core  -->

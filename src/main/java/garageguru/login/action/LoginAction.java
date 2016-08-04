@@ -29,59 +29,77 @@ public class LoginAction extends HttpServlet{
 	private LoginBeanI loginBean;
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		PrintWriter resp = response.getWriter();
 		
-		Users user = new Users();
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
 		
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, 1);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String dateLogin = format.format(cal.getTime());
-
-		SimpleDateFormat timeformat = new SimpleDateFormat("h:m:s");
-		String timeLogin = timeformat.format(cal.getTime());
+		if(path.equalsIgnoreCase("logout"))
+			this.logout(request, response);
 		
-		String username, password;
+		else{
 		
-		username = request.getParameter("username");
-		password = request.getParameter("password");
-		password = hash(password);
+			PrintWriter resp = response.getWriter();
+			
+			Users user = new Users();
+			
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, 1);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String dateLogin = format.format(cal.getTime());
+	
+			SimpleDateFormat timeformat = new SimpleDateFormat("h:m:s");
+			String timeLogin = timeformat.format(cal.getTime());
+			
+			String username, password;
+			
+			username = request.getParameter("username");
+			password = request.getParameter("password");
+			password = hash(password);
+					
+			
+			boolean check;
+			check = loginBean.loginCheck(username, password);
 				
-		
-		boolean check;
-		check = loginBean.loginCheck(username, password);
-		
-		
-		if(check==true){
-			List uniqueLink = loginBean.returnUniqueLink(username);
-			String uniqueLinkString = (String) uniqueLink.get(0); 
-			
-			//resp.println("Success");
-			HttpSession session = request.getSession();
-			session.setAttribute("user", username);
-			session.setAttribute("uniqueLink", uniqueLinkString);
-			
-			//set session to expire after inactive 10 mins
-			session.setMaxInactiveInterval(10*60);
-			Cookie userNameCookie = new Cookie("user", username);
-			response.addCookie(userNameCookie);
-			
-			Cookie uniqueLinkCookie = new Cookie("uniqueLink", uniqueLinkString);
-			response.addCookie(uniqueLinkCookie);
-			
-			//get encoded url string
-			/*String encodedURL = response.encodeRedirectUrl("./../index.jsp");
-			response.sendRedirect(encodedURL);
-			*/
-			
-			loginBean.updateAfterLogin(uniqueLinkString, username);
+			if(check==true){
+				//get user level
+				String userLevel;
+				userLevel = loginBean.userLevel(username);
+							
+				List uniqueLink = loginBean.returnUniqueLink(username);
+				String uniqueLinkString = (String) uniqueLink.get(0); 
+				
+				//resp.println("Success");
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("user", username);
+				session.setAttribute("uniqueLink", uniqueLinkString);
+				session.setAttribute("userLevel", userLevel);
+				
+				//set session to expire after inactive 10 seconds
+				session.setMaxInactiveInterval(10*60);
+				
+				Cookie userNameCookie = new Cookie("user", username);
+				response.addCookie(userNameCookie);
+				
+				Cookie uniqueLinkCookie = new Cookie("uniqueLink", uniqueLinkString);
+				response.addCookie(uniqueLinkCookie);
+				
+				Cookie userLevelCookie = new Cookie("userLevel", userLevel);
+				response.addCookie(userLevelCookie);
+				
+				//get encoded url string
+				/*String encodedURL = response.encodeRedirectUrl("./../index.jsp");
+				response.sendRedirect(encodedURL);
+				*/
+				
+				loginBean.updateAfterLogin(uniqueLinkString, username);
+				
+			}
+				
+			else
+				resp.println("Oops! Sorry. The username-password combination din't work");
 			
 		}
-			
-		else
-			resp.println("Oops! Sorry. The username-password combination din't work");
-			
-		
 	}
 	
 	private static String hash(String s) {
@@ -94,6 +112,15 @@ public class LoginAction extends HttpServlet{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		HttpSession session = request.getSession();
+		String username = session.getAttribute("user").toString();
+		//update logout status
+		loginBean.updateAfterLogout(username);
+		//unset session
+		session.invalidate();
 	}
 	
 }

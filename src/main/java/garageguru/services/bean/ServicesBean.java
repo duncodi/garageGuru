@@ -111,6 +111,21 @@ public class ServicesBean implements ServicesBeanI{
 	public int countPendingServices(String uniqueLink) {
 		return servicesDao.countPendingServices(uniqueLink);
 	}
+
+	@Override
+	public int countTodayServices(String confirmationLink) {
+		return servicesDao.countTodayServices(confirmationLink);
+	}
+
+	@Override
+	public int countTodayPendingServices(String confirmationLink) {
+		return servicesDao.countTodayPendingServices(confirmationLink);
+	}
+
+	@Override
+	public Long sumTodayExpectedPayments(String confirmationLink) {
+		return servicesDao.sumTodayExpectedPayments(confirmationLink);
+	}
 	
 	
 }

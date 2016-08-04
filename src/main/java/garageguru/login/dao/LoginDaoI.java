@@ -9,4 +9,6 @@ public interface LoginDaoI {
 	boolean loginCheck(String username, String password);
 	List returnUniqueLink(String username);
 	int updateAfterLogin(String uniqueLinkString, String username);
+	String userLevel(String username);
+	int updateAfterLogout(String username);
 }

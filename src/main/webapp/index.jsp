@@ -11,16 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/images/logo.png" />
     
-
-
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap-extend.min.css">
     <link rel="stylesheet" href="assets/css/site.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
     
-    
-   
     <!-- Page -->
     <link rel="stylesheet" href="assets/css/login.min.css">
     
@@ -276,108 +272,14 @@
               <li role="presentation">
                 <a href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
               </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Billing</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>
-              </li>
               <li class="divider" role="presentation"></li>
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+                <a href="logout.jsp" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
               </li>
             </ul>
           </li>
           
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Messages" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon wb-envelope" aria-hidden="true"></i>
-              <span class="badge badge-info up">3</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>MESSAGES</h5>
-                <span class="label label-round label-info">New 3</span>
-              </li>
-
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-online">
-                            <img src="global/portraits/2.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Mary Adams</h6>
-                          <div class="media-meta">
-                            <time datetime="2016-06-17T20:22:05+08:00">30 minutes ago</time>
-                          </div>
-                          <div class="media-detail">Anyways, i would like just do it</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-off">
-                            <img src="global/portraits/3.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Caleb Richards</h6>
-                          <div class="media-meta">
-                            <time datetime="2016-06-17T12:30:30+08:00">12 hours ago</time>
-                          </div>
-                          <div class="media-detail">I checheck the document. But there seems</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-busy">
-                            <img src="global/portraits/4.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">June Lane</h6>
-                          <div class="media-meta">
-                            <time datetime="2016-06-16T18:38:40+08:00">2 days ago</time>
-                          </div>
-                          <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-away">
-                            <img src="global/portraits/5.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Edward Fletcher</h6>
-                          <div class="media-meta">
-                            <time datetime="2016-06-15T20:34:48+08:00">3 days ago</time>
-                          </div>
-                          <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              
-            </ul>
-          </li>
+          
           <li id="toggleChat">
             <a data-toggle="site-sidebar" href="javascript:void(0)" title="Chat" data-url="site-sidebar.tpl">
               <i class="icon wb-chat" aria-hidden="true"></i>
@@ -408,6 +310,9 @@
     <div class="site-menubar-body">
       <div>
         <div>
+        	<%
+			if((request.getSession().getAttribute("userLevel").toString()).equalsIgnoreCase("Admin")){
+			%>
           <ul class="site-menu">
 
             <li class="site-menu-category">DASHBOARD for 
@@ -415,9 +320,9 @@
 					if (request.getSession().getAttribute("user") != null) {
 						out.println(request.getSession().getAttribute("user").toString().toUpperCase());
 					}
+            		            	
 				%>
             </li>
-
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
@@ -484,6 +389,98 @@
               </ul>
             </li>
             
+            <li class="site-menu-category">REPORTS</li>
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
+                <span class="site-menu-title">Finance</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="viewMiniStatement()">
+                    <span class="site-menu-title">Mini Statement</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="viewPayments()">
+                    <span class="site-menu-title">Full Transaction Listing</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="createPaymentsFilter()">
+                    <span class="site-menu-title">Filter Transactions</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="viewAccountDetails()">
+                    <span class="site-menu-title">Account Details</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
+                <span class="site-menu-title">Garage Services</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="viewServices()">
+                    <span class="site-menu-title">All Services</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" onclick="pendingServices()">
+                    <span class="site-menu-title">Pending Services</span>
+                  </a>
+               	</li>
+               	<li class="site-menu-item">
+                  <a class="animsition-link" onclick="createServicesFilter()">
+                    <span class="site-menu-title">Filter Services</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            
+          </ul>
+			<% 
+			}
+			else if((request.getSession().getAttribute("userLevel").toString()).equalsIgnoreCase("User")){
+			
+			%>
+			
+			<!-- USER -->
+			
+			<ul class="site-menu">
+
+            <li class="site-menu-category">DASHBOARD for 
+            	<%
+					if (request.getSession().getAttribute("user") != null) {
+						out.println(request.getSession().getAttribute("user").toString().toUpperCase());
+					}
+            		            	
+				%>
+            </li>
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                <span class="site-menu-title">Dashboard</span>
+                <div class="site-menu-badge">
+                  <span class="badge badge-success">1</span>
+                </div>
+              </a>
+              <ul class="site-menu-sub">
+               <li class="site-menu-item">
+                      <a class="animsition-link" href="index.jsp">
+                        <span class="site-menu-title">Dashboard</span>
+                      </a>
+               </li>
+              </ul>
+            </li>
+            <li class="site-menu-category">User Options</li>            
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon wb-pie-chart" aria-hidden="true"></i>
@@ -590,23 +587,19 @@
             </li>
             
           </ul>
-
-          <div class="site-menubar-section">
-            <h5>
-              Milestone
-              <span class="pull-right">30%</span>
-            </h5>
-            <div class="progress progress-xs">
-              <div class="progress-bar active" style="width: 30%;" role="progressbar"></div>
-            </div>
-            <h5>
-              Release
-              <span class="pull-right">60%</span>
-            </h5>
-            <div class="progress progress-xs">
-              <div class="progress-bar progress-bar-warning" style="width: 60%;" role="progressbar"></div>
-            </div>
-          </div>
+			
+			<%
+			}
+			else{	
+				
+			%>
+				<script type="text/javascript">
+					window.location.href="logout.jsp"
+				</script>
+	        <%
+			}
+	        %>
+			
         </div>
       </div>
     </div>
@@ -695,17 +688,32 @@
                 <div id="ajax-form-content" class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
 					
 					<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xs-6">
-						<h4>Full Finance Analysis</h4>
-						<div id="donutFinance"></div>
+						<h4>Today Services Analysis</h4>
+						<div id="donutTodayServices"></div>
 					</div>
+					
+					<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xs-6">
+						<h4>Today Finance Analysis</h4>
+						<div id="donutTodayFinance"></div>
+					</div>
+					
+					<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+						<hr>
+					</div>
+					
 					<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xs-6">
 						<h4>Full Services Analysis</h4>
 						<div id="donutServices"></div>
 					</div>
-					<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+					<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xs-6">
+						<h4>Full Finance Analysis</h4>
+						<div id="donutFinance"></div>
+					</div>
+					
+					<!--<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
 						<h4>Performance Analysis</h4>
 						<div id="lineGraph"></div>
-					</div>
+					</div>-->
                 </div>
                
               </div>

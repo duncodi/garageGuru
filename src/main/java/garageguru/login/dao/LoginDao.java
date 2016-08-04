@@ -61,4 +61,21 @@ public class LoginDao implements LoginDaoI{
 		
 	}
 
+	@Override
+	public String userLevel(String username) {
+		Query query = em.createQuery("select userLevel from Users where username=:username");
+		query.setParameter("username", username);
+		List result = query.getResultList();
+		
+		return (String) result.get(0);
+	}
+
+	@Override
+	public int updateAfterLogout(String username) {
+		Query query = em.createQuery("update Users set loggedIn=:loggedIn where username=:username");
+		query.setParameter("loggedIn", 1);
+		query.setParameter("username", username);
+		return query.executeUpdate();
+	}
+
 }

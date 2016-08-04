@@ -145,5 +145,32 @@ public class PaymentsBean implements PaymentsBeanI {
 		// TODO Auto-generated method stub
 		return paymentsDao.countTotalDebits(serviceNo);
 	}
+
+	@Override
+	public int countTodayCredits(String confirmationLink) {
+		// TODO Auto-generated method stub
+		return paymentsDao.countTodayCredits(confirmationLink);
+	}
+
+
+	@Override
+	public int countTodayDebits(String confirmationLink) {
+		// TODO Auto-generated method stub
+		return paymentsDao.countTodayDebits(confirmationLink);
+	}
+
+
+	@Override
+	public Long sumTodayCredits(String confirmationLink) {
+		// TODO Auto-generated method stub
+		return paymentsDao.sumTodayCredits(confirmationLink);
+	}
+
+
+	@Override
+	public Long sumTodayDebits(String confirmationLink) {
+		// TODO Auto-generated method stub
+		return paymentsDao.sumTodayDebits(confirmationLink);
+	}
 	
 }

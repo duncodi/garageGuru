@@ -50,6 +50,9 @@ public class PaymentsAction extends HttpServlet{
 		else if(path.equalsIgnoreCase("newPayment")){
 			this.services(response, uniqueLink);
 		}
+		else if(path.equalsIgnoreCase("todayPaymentSummary")){
+			this.todayPaymentsSummary(response, uniqueLink);
+		}
 		else{
 			this.payments(response, uniqueLink);
 		}
@@ -228,7 +231,35 @@ public class PaymentsAction extends HttpServlet{
 		resp.print("\"");resp.print("countCredits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(countCredits);resp.print("\", ");
 		resp.print("\"");resp.print("countDebits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(countDebits);resp.print("\"");
 		resp.print("}");
-		
 		resp.print("]");
+		
+	}
+	
+	public void todayPaymentsSummary(HttpServletResponse response, String uniqueLink) throws ServletException, IOException{
+		PrintWriter resp = response.getWriter();
+		Long sumCredits, sumDebits;
+		int countCredits = paymentsBean.countTodayCredits(uniqueLink);
+		int countDebits = paymentsBean.countTodayDebits(uniqueLink);
+		
+		if(countCredits == 0)
+			sumCredits = (long) 0;
+		else
+			sumCredits = paymentsBean.sumTodayCredits(uniqueLink);
+		
+		if(countDebits == 0)
+			sumDebits = (long) 0;
+		else
+			sumDebits = paymentsBean.sumTodayDebits(uniqueLink);
+		
+		//json
+		resp.print("[");
+			resp.print("{");
+				resp.print("\"");resp.print("sumCredits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(sumCredits);resp.print("\", ");
+				resp.print("\"");resp.print("sumDebits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(sumDebits);resp.print("\", ");
+				resp.print("\"");resp.print("countCredits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(countCredits);resp.print("\", ");
+				resp.print("\"");resp.print("countDebits");resp.print("\"");resp.print(": "); resp.print("\"");resp.print(countDebits);resp.print("\"");
+			resp.print("}");
+		resp.print("]");
+		
 	}
 }

@@ -2,6 +2,8 @@ package garageguru.services.dao;
 
 import garageguru.services.model.Services;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -93,5 +95,50 @@ public class ServicesDao implements ServicesDaoI{
 		Query query = em.createQuery("select cost from Services where serviceNo=:serviceNo");
 		query.setParameter("serviceNo", serviceNo);
 		return query.getResultList();
+	}
+
+	@Override
+	public int countTodayServices(String confirmationLink) {
+		String date = this.returnDate();
+		Query query = em.createQuery("select count(id) from Services where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
+
+	@Override
+	public int countTodayPendingServices(String confirmationLink) {
+		String serviceComplete = "No";
+		String date = this.returnDate();
+		Query query = em.createQuery("select count(id) from Services where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated AND (serviceComplete=:serviceComplete OR totalPaid>cost)");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		query.setParameter("serviceComplete", serviceComplete);
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
+
+	@Override
+	public Long sumTodayExpectedPayments(String confirmationLink) {
+		String date = this.returnDate();
+		Query query = em.createQuery("select sum(cost) from Services where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		List result = query.getResultList();
+		Long sum = (Long) result.get(0);
+		return sum;
+	}
+	
+	//get date
+	public String returnDate(){
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 1);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateUpdated = format.format(cal.getTime());
+		
+		return dateUpdated;
 	}
 }

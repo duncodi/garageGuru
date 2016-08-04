@@ -1,5 +1,7 @@
 package garageguru.payments.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import garageguru.payments.model.Payments;
@@ -49,9 +51,10 @@ public class PaymentsDao implements PaymentsDaoI {
 	//MINI STATEMENT
 	@Override
 	public int countMiniStatement(String confirmationLink) {
-		Query query = em.createQuery("select count(id) from Payments where confirmationLink=:confirmationLink");
+		String date = this.returnDate();
+		Query query = em.createQuery("select count(id) from Payments where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated");
 		query.setParameter("confirmationLink", confirmationLink);
-		//query.setMaxResults(3);
+		query.setParameter("dateUpdated", date);
 		
 		List result = query.getResultList();
 		
@@ -60,9 +63,11 @@ public class PaymentsDao implements PaymentsDaoI {
 
 	@Override
 	public List<Payments> miniStatementInJson(Payments allPayments, String confirmationLink) {
-		Query query = em.createQuery("from Payments where confirmationLink=:confirmationLink");
+		String date = this.returnDate();
+		Query query = em.createQuery("from Payments where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated");
 		query.setParameter("confirmationLink", confirmationLink);
-		//query.setMaxResults(4);
+		query.setParameter("dateUpdated", date);
+		
 		return query.getResultList();
 	}
 	//////////END MINI STATEMENT
@@ -170,7 +175,69 @@ public class PaymentsDao implements PaymentsDaoI {
 		
 		return ((Long) result.get(0)).intValue();
 	}
+
+	//TODAY PAYMENTS ANALYSIS
+	@Override
+	public int countTodayCredits(String confirmationLink) {
+		String type = "Credit";
+		String date = this.returnDate();
+
+		Query query = em.createQuery("select count(id) from Payments where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated AND transactionType=:type");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		query.setParameter("type", type);
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
+
+	@Override
+	public int countTodayDebits(String confirmationLink) {
+		String type = "Debit";
+		String date = this.returnDate();
+
+		Query query = em.createQuery("select count(id) from Payments where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated AND transactionType=:type");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		query.setParameter("type", type);
+		List result = query.getResultList();
+		
+		return ((Long) result.get(0)).intValue();
+	}
+
+	@Override
+	public Long sumTodayCredits(String confirmationLink) {
+		String type = "Credit";
+		String date = this.returnDate();
+		Query query = em.createQuery("select sum(amount) from Payments where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated AND transactionType=:type");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		query.setParameter("type", type);
+		List result = query.getResultList();
+		Long sum = (Long) result.get(0);
+		return sum;
+	}
+
+	@Override
+	public Long sumTodayDebits(String confirmationLink) {
+		String type = "Debit";
+		String date = this.returnDate();
+		Query query = em.createQuery("select sum(amount) from Payments where confirmationLink=:confirmationLink AND dateUpdated=:dateUpdated AND transactionType=:type");
+		query.setParameter("confirmationLink", confirmationLink);
+		query.setParameter("dateUpdated", date);
+		query.setParameter("type", type);
+		List result = query.getResultList();
+		Long sum = (Long) result.get(0);
+		return sum;
+	}
 	
-	
+	public String returnDate(){
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 1);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateUpdated = format.format(cal.getTime());
+		
+		return dateUpdated;
+	}
 
 }

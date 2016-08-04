@@ -25,4 +25,7 @@ public interface ServicesDaoI {
 	
 	List getCost(String serviceNo);
 	
+	int countTodayServices(String confirmationLink);
+	int countTodayPendingServices(String confirmationLink);
+	Long sumTodayExpectedPayments(String confirmationLink);
 }

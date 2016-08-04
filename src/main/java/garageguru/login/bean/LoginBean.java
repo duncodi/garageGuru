@@ -43,4 +43,14 @@ public class LoginBean implements LoginBeanI{
 		return loginDao.updateAfterLogin(uniqueLinkString, username);
 	}
 
+	@Override
+	public String userLevel(String username) {
+		return loginDao.userLevel(username);
+	}
+
+	@Override
+	public int updateAfterLogout(String username) {
+		return loginDao.updateAfterLogout(username);
+	}
+
 }

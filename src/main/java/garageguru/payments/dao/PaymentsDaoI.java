@@ -38,4 +38,11 @@ public interface PaymentsDaoI {
 	
 	int countTotalDebits(String serviceNo);
 	
+	//DAILY TRANSACTIONS
+	int countTodayCredits(String confirmationLink);
+	int countTodayDebits(String confirmationLink);
+	Long sumTodayCredits(String confirmationLink);
+	Long sumTodayDebits(String confirmationLink);
+	
+	
 }

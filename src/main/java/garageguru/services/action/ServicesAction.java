@@ -53,6 +53,9 @@ public class ServicesAction extends HttpServlet {
 		else if(path.equalsIgnoreCase("serviceAnalysis")){
 			this.serviceAnalysis(response, uniqueLink);
 		}
+		else if(path.equalsIgnoreCase("todayServicesSummary")){
+			this.todayServicesSummary(response, uniqueLink);
+		}
 		else{
 			this.services(response, uniqueLink);
 		}
@@ -149,4 +152,24 @@ public class ServicesAction extends HttpServlet {
 			resp.print("}");
 		resp.print("]");
 	}
+	public void todayServicesSummary(HttpServletResponse response, String uniqueLink) throws ServletException, IOException{
+		PrintWriter resp = response.getWriter();
+		int todayServices = servicesBean.countTodayServices(uniqueLink);
+		int todayPendingServices = servicesBean.countTodayPendingServices(uniqueLink);
+		Long expectedPayments;
+
+		if(todayServices == 0)
+			expectedPayments = (long) 0;
+		else	
+			expectedPayments = servicesBean.sumTodayExpectedPayments(uniqueLink);
+		
+		resp.print("[");
+			resp.print("{");
+				resp.print("\"");resp.print("allServices");resp.print("\"");resp.print(": ");resp.print("\"");resp.print(todayServices);resp.print("\", ");
+				resp.print("\"");resp.print("pendingServices");resp.print("\"");resp.print(": ");resp.print("\"");resp.print(todayPendingServices);resp.print("\", ");
+				resp.print("\"");resp.print("expectedPayments");resp.print("\"");resp.print(": ");resp.print("\"");resp.print(expectedPayments);resp.print("\"");
+			resp.print("}");
+		resp.print("]");
+	}
+	
 }

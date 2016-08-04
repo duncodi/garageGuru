@@ -22,7 +22,7 @@ function loginAction(params, uri){
 		if(ajax.readyState == 4){			
 			if(ajax.status == 200){
 				if(ajax.responseText == "")
-					location.href="http://localhost:8080/garageGuru/index.jsp";
+					location.href="index.jsp";
 				else
 					getElById("errorMsg").innerHTML = ajax.responseText;
 				

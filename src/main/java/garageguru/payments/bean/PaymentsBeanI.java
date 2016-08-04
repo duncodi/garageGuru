@@ -30,4 +30,9 @@ public interface PaymentsBeanI {
 	int countTotalCredits(String serviceNo);
 	
 	int countTotalDebits(String serviceNo);
+	
+	int countTodayCredits(String confirmationLink);
+	int countTodayDebits(String confirmationLink);
+	Long sumTodayCredits(String confirmationLink);
+	Long sumTodayDebits(String confirmationLink);
 }

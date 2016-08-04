@@ -21,4 +21,8 @@ public interface ServicesBeanI {
 	
 	int countAllServices(String uniqueLink);
 	int countPendingServices(String uniqueLink);
+	
+	int countTodayServices(String confirmationLink);
+	int countTodayPendingServices(String confirmationLink);
+	Long sumTodayExpectedPayments(String confirmationLink);
 }
