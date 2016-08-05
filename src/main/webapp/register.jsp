@@ -53,31 +53,38 @@
         <form method="post" action="#">
           <div class="form-group">
             <label class="sr-only" for="idNumber">Id/Company Reg No.:</label>
-            <input type="text" class="form-control" onkeyup="isNull('idNumber');" id="idNumber" name="idNumber" placeholder="Id/Company Reg No.">
+            <input type="text" class="form-control" onkeyup="isNull('idNumber'); setLength('idNumber', '3', '10');" id="idNumber" name="idNumber" placeholder="Id/Company Reg No.">
+            <span id="idNumber_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="firstName">First Name</label>
-            <input type="text" class="form-control" onkeyup="isNull('firstName');" id="firstName" name="firstName" placeholder="First Name">
+            <input type="text" class="form-control" onkeyup="isNull('firstName'); setLength('firstName', '3', '20');" id="firstName" name="firstName" placeholder="First Name">
+          	<span id="firstName_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="secondName">Second Name</label>
-            <input type="text" class="form-control" onkeyup="isNull('secondName');" id="secondName" name="secondName" placeholder="Second Name">
+            <input type="text" class="form-control" onkeyup="isNull('secondName'); setLength('secondName', '3', '10');" id="secondName" name="secondName" placeholder="Second Name">
+          	<span id="secondName_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="phone">Cell Phone (+254)</label>
-            <input type="text" class="form-control" onkeyup="isNull('phone');" id="phone" name="phone" placeholder="Cell Phone (+254) e.g. 712345678">
+            <input type="text" class="form-control" onkeyup="isNull('phone'); isPhone('phone');" id="phone" name="phone" placeholder="Cell Phone (+254) e.g. 712345678">
+          	<span id="phone_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="email">Email</label>
-            <input type="email" class="form-control" onkeyup="isNull('email');" id="email" name="email" placeholder="Email">
+            <input type="email" class="form-control" onkeyup="isNull('email'); isEmail('email');" id="email" name="email" placeholder="Email">
+          	<span id="email_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="garageName">Garage Name</label>
-            <input type="text" class="form-control" onkeyup="isNull('garageName');" id="garageName" name="garageName" placeholder="Garage Name">
+            <input type="text" class="form-control" onkeyup="isNull('garageName'); setLength('garageName', '3', '40');" id="garageName" name="garageName" placeholder="Garage Name">
+          	<span id="garageName_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="address">Garage Address</label>
-            <input type="text" class="form-control" onkeyup="isNull('address');" id="address" name="address" placeholder="P.O BOX 111-0000 TOWN">
+            <input type="text" class="form-control" onkeyup="isNull('address'); setLength('address', '10', '50');" id="address" name="address" placeholder="P.O BOX 111-0000 TOWN" value="P.O BOX ">
+          	<span id="address_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="location">Garage Location (Town)</label>
@@ -87,20 +94,24 @@
             	<option value="Nakuru">Nakuru</option>
             	<option value="Mombasa">Mombasa</option>
             </select>
+          	<span id="location_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="country">Country</label>
-            <input type="text" class="form-control" onkeyup="isNull('country');" id="country" name="country" value="KENYA" readonly placeholder="Country">
+            <input type="text" class="form-control" onkeyup="isNull('country'); setLength('country', '3', '20');" id="country" name="country" value="KENYA" readonly placeholder="Country">
+          	<span id="country_error" style="color:red; font-size:11px"></span>
           </div>
           <div class="form-group">
             <label class="sr-only" for="garageDescription">Garage Description</label>
-            <textarea rows="3" name="garageDescription" onkeyup="isNull('garageDescription');" id="garageDescription" class="form-control" placeholder="Brief Garage Description"></textarea>
+            <textarea rows="3" name="garageDescription" onkeyup="isNull('garageDescription'); setLength('garageDescription', '20', '100');" id="garageDescription" class="form-control" placeholder="Brief Garage Description"></textarea>
+          	<span id="garageDescription_error" style="color:red; font-size:11px"></span>
+          </div>
+          <div class="form-group">
+            <input type="button" class="btn btn-primary btn-block" id="signUpButton" onclick="validateSignUp();" value="Sign Up" />
+          	<span id="signUpButton_error" style="color:red; font-size:11px"></span>
           </div>
          
-         
         </form>
-		<a class="btn btn-primary btn-block" id="signUpButton" onclick="validate();">Sign Up</a>
-		
 		
         <p>You have an account? <a href="login.jsp">Sign In</a></p>
 
@@ -129,6 +140,7 @@
 	<!-- custom js -->
 		<script src="assets/custom/custom.js"></script>
 		<script src="assets/custom/register.js"></script>
+		<script src="assets/custom/duncodiValidator.js"></script>
 		<script src="assets/custom/validate.js"></script>
 	<!-- --- -->
 

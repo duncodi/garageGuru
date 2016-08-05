@@ -1,44 +1,34 @@
-function validate(){
-}
-
-function getElById(el){
-	return document.getElementById(el);
-}
-
-function isNull(elId){
-	var field = getElById(elId);
-	var fieldId = field.id;
-	var fieldValue = field.value;
+function validateSignUp(){
+	//NULL CHECK. should return false for A SUCCESS	
+	var idNumberIsNull = isNull('idNumber');
+	var firstNameIsNull = isNull('firstName');
+	var secondNameIsNull = isNull('secondName');
+	var phoneIsNull = isNull('phone');
+	var emailIsNull = isNull('email');
+	var garageNameIsNull = isNull('garageName');
+	var addressIsNull = isNull('address');
+	var locationIsNull = isNull('location');
+	var countryIsNull = isNull('country');
+	var garageDescriptionIsNull = isNull('garageDescription');
 	
-	if(fieldValue){
-		commonOkay(elId);
+	//EMAIL CHECK... should return true for A SUCCESS
+	var emailIsEmail = isEmail('email');
+	var phoneIsPhone = isPhone('phone');
+	
+	//LENGTH CHECK
+	var idNumberLength = isNull('idNumber');
+	var firstNameLength = isNull('firstName');
+	var secondNameLength = isNull('secondName');
+	var phoneLength = isNull('phone');
+	var emailLength = isNull('email');
+	var garageNameLength = isNull('garageName');
+	var addressLength = isNull('address');
+	var locationLength = isNull('location');
+	var countryLength = isNull('country');
+	var garageDescriptionLength = isNull('garageDescription');	
+	
+	if((idNumberIsNull==false && firstNameIsNull==false && secondNameIsNull==false && phoneIsNull==false && emailIsNull==false && garageNameIsNull==false && addressIsNull==false && locationIsNull==false && countryIsNull==false && garageDescriptionIsNull==false) && (emailIsEmail==true) && (phoneIsPhone==true) && (idNumberLength==true && firstNameLength==true && secondNameLength==true && phoneLength==true && emailLength==true && garageNameLength==true && addressLength==true && locationLength==true && countryLength==true && garageDescriptionLength==true))
+		register();
+	else
 		return false;
-	}
-	else{
-		commonError(elId);
-		return true;
-	}
-	
 }
-
-
-function commonOkay(elId){
-	getElById(elId).style.backgroundColor = "#e1ffdc";
-	getElById(elId).style.borderColor = "#1b9506";
-	getElById('signUpButton').disabled = false;
-	
-	var x = getElById('signUpButton').disabled = false;
-	console.log(x);
-}
-
-function commonError(elId){
-	getElById(elId).style.backgroundColor = "#f5dddd";
-	getElById(elId).style.borderColor = "red";
-	getElById(elId).style.borderWidth = "1px";
-	var fieldName = getElById(elId).name;
-	getElById(elId).placeholder = fieldName+" is required";
-	getElById('signUpButton').disabled = true;
-	var x = getElById('signUpButton').disabled = true;
-	console.log(x);
-}
-
